@@ -15,7 +15,11 @@ export function Layout(props: LayoutProps) {
         <head>
           <meta charset="utf-8" />
           <meta name="viewport" content="width=device-width, initial-scale=1" />
-          <link href="/assets/favicon.ico" rel="icon" type="image/x-icon"></link>
+          <link href="/assets/favicon.ico" rel="icon" type="image/x-icon" />
+          <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap"
+            rel="stylesheet"
+          />
 
           <title>Apneaquatir | Réservation de la fosse</title>
 
