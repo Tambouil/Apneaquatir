@@ -1,4 +1,4 @@
-import { Vite } from '@adonisjs/vite'
+import { Vite } from '#start/view'
 import type { Children } from '@kitajs/html'
 
 interface LayoutProps {
@@ -19,7 +19,7 @@ export function Layout(props: LayoutProps) {
 
           <title>Apneaquatir | Réservation de la fosse</title>
 
-          <Vite.Entrypoint entrypoints={['resources/css/app.scss', 'resources/js/app.js']} />
+          <Vite.Entrypoint entrypoints={['resources/css/app.css', 'resources/js/app.js']} />
         </head>
         <body>{children}</body>
       </html>
