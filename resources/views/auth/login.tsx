@@ -4,7 +4,7 @@ import { Vite, csrfField, route } from '#start/view'
 const login = () => {
   return (
     <Layout>
-      <main main-layout class="bg-login h-screen">
+      <main class="bg-login h-screen">
         <section class="relative flex flex-wrap lg:h-screen lg:items-center">
           <div class="w-full px-4 py-12 sm:px-6 sm:py-16 lg:w-1/2 lg:px-8 lg:py-24">
             <div class="mx-auto max-w-lg text-center">
@@ -28,6 +28,8 @@ const login = () => {
 
                 <div class="relative">
                   <input
+                    id="email"
+                    name="email"
                     type="email"
                     class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
                     placeholder="Entrer votre email"
@@ -59,6 +61,8 @@ const login = () => {
 
                 <div class="relative">
                   <input
+                    id="password"
+                    name="password"
                     type="password"
                     class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
                     placeholder="Entrer votre mot de passe"
