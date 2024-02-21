@@ -1,4 +1,17 @@
 import vite from '@adonisjs/vite/services/main'
+import router from '@adonisjs/core/services/router'
+import { HttpContext } from '@adonisjs/core/http'
+
+export function csrfField() {
+  // Note the usage of ALS here.
+  const { request } = HttpContext.getOrFail()
+
+  return Html.createElement('input', { type: 'hidden', value: request.csrfToken, name: '_csrf' })
+}
+
+export function route(...args: Parameters<typeof router.makeUrl>) {
+  return router.makeUrl(...args)
+}
 
 function Image(props: { src: string; alt?: string; class?: string }) {
   const url = vite.assetPath(props.src)
