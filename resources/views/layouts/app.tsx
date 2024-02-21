@@ -1,5 +1,5 @@
 import { Vite } from '#start/view'
-import { Header } from '#views/components/layout/header'
+
 import type { Children } from '@kitajs/html'
 
 interface LayoutProps {
@@ -27,10 +27,7 @@ export function Layout(props: LayoutProps) {
           <Vite.Entrypoint entrypoints={['resources/css/app.css', 'resources/js/app.js']} />
         </head>
         <body>
-          <>
-            <Header />
-            {children}
-          </>
+          <>{children}</>
         </body>
       </html>
     </>
