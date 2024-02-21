@@ -3,9 +3,9 @@ import { withAuthFinder } from '@adonisjs/auth'
 import hash from '@adonisjs/core/services/hash'
 import { compose } from '@adonisjs/core/helpers'
 import { BaseModel, column } from '@adonisjs/lucid/orm'
+import Role from '../enums/roles.js'
 
 import type { Opaque } from '@adonisjs/core/types/helpers'
-import Role from '../enums/roles.js'
 
 const AuthFinder = withAuthFinder(() => hash.use('scrypt'), {
   uids: ['email'],
