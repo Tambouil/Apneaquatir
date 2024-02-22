@@ -5,7 +5,7 @@ export function Home() {
   return (
     <Layout>
       <Header />
-      <h1 class="text-3xl font-bold underline text-red-500">Hello World</h1>
+      <h1 class="text-3xl font-bold underline text-center">Home</h1>
     </Layout>
   )
 }
