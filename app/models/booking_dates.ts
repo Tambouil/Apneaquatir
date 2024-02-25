@@ -1,5 +1,3 @@
-// App/Models/Month.ts
-
 import { BaseModel, column } from '@adonisjs/lucid/orm'
 import { DateTime } from 'luxon'
 
@@ -12,7 +10,10 @@ export default class BookingDates extends BaseModel {
   declare id: BookingDatesId
 
   @column()
-  declare dateAvailable: string[]
+  declare batchId: string
+
+  @column()
+  declare dateAvailable: string
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
