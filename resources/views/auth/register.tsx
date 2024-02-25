@@ -22,14 +22,14 @@ const register = () => {
             >
               {csrfField()}
               <div>
-                <label for="full_name" class="sr-only">
+                <label for="fullName" class="sr-only">
                   Nom complet
                 </label>
 
                 <div class="relative">
                   <input
-                    id="full_name"
-                    name="full_name"
+                    id="fullName"
+                    name="fullName"
                     type="text"
                     class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
                     placeholder="Entrer votre nom complet"

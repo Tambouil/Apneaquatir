@@ -8,9 +8,9 @@ export default class RegisterController {
   }
 
   async handleForm({ auth, request, response }: HttpContext) {
-    const { email, password, full_name } = request.only(['email', 'password', 'full_name'])
+    const { email, password, fullName } = request.only(['email', 'password', 'fullName'])
 
-    const user = await User.create({ email, password, full_name })
+    const user = await User.create({ email, password, fullName })
     await auth.use('web').login(user)
 
     return response.redirect('/')
