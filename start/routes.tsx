@@ -15,6 +15,8 @@ const RegisterController = () => import('#controllers/register.controller')
 const LoginController = () => import('#controllers/login.controller')
 const LogoutController = () => import('#controllers/logout.controller')
 
+const BookingDatesController = () => import('#controllers/booking_dates.controller')
+
 router.get('/', async () => {
   return <Home />
 })
@@ -30,5 +32,6 @@ router
     router.post('register', [RegisterController, 'handleForm']).as('auth.register')
     router.get('login', [LoginController, 'renderView'])
     router.post('login', [LoginController, 'handleForm']).as('auth.login')
+    router.post('/', [BookingDatesController, 'create']).as('booking.create')
   })
   .middleware([middleware.guest()])

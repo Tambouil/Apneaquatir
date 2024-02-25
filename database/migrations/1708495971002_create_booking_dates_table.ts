@@ -1,13 +1,12 @@
 import { BaseSchema } from '@adonisjs/lucid/schema'
 
 export default class extends BaseSchema {
-  protected tableName = 'months'
+  protected tableName = 'booking_dates'
 
   async up() {
     this.schema.createTable(this.tableName, (table) => {
-      table.increments('id').primary()
-      table.date('month_date').unique().notNullable()
-
+      table.uuid('id').primary().defaultTo(this.db.rawQuery('gen_random_uuid()').knexQuery)
+      table.string('date_available').notNullable()
       table.timestamp('created_at', { useTz: false })
       table.timestamp('updated_at', { useTz: false })
     })
