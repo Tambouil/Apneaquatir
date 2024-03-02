@@ -1,0 +1,60 @@
+@component('layouts/auth', { title: 'Se connecter' , description:'description' })
+  <form action="#" class="mt-8 grid grid-cols-6 gap-6" up-target="[layout-root]" up-fail-target="[layout-main]">
+    <div class="col-span-6">
+      @form.control({
+        name: 'email',
+        errorKey: 'auth.errors.uid'
+      })
+        <div class="block text-sm font-medium text-gray-700">
+          @!form.label({ title: 'Adresse Email' })
+        </div>
+        <div>
+          @!form.input({ type: 'email', placeholder: 'Email' })
+          @!form.error()
+        </div>
+      @end
+    </div>
+
+    <div class="col-span-6">
+      @form.control({
+        name: 'password',
+        errorKey: 'auth.errors.password'
+      })
+        <div class="block text-sm font-medium text-gray-700">
+          @!form.label({ title: 'Mot de passe' })
+        </div>
+        <div>
+          @!form.input({ type: 'password', placeholder: 'Mot de passe' })
+          @!form.error()
+        </div>
+      @end
+    </div>
+
+    <div class="col-span-6 sm:flex sm:items-center sm:gap-4">
+      <button
+        type="submit"
+        class="inline-block shrink-0 rounded-md border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-blue-600 focus:outline-none focus:ring active:text-blue-500"
+      >
+        Se connecter
+      </button>
+
+      <p class="mt-4 text-sm text-gray-500 sm:mt-0">
+        Pas encore inscrit ?
+        <a href="{{ route('auth.register') }}" class="text-gray-700 underline">Créer un compte</a>.
+      </p>
+    </div>
+  </form>
+@end
+
+
+
+
+
+
+
+
+
+
+
+
+

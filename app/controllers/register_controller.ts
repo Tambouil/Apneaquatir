@@ -1,10 +1,9 @@
 import User from '#models/user'
-import Register from '#views/auth/register'
 import { HttpContext } from '@adonisjs/core/http'
 
 export default class RegisterController {
-  renderView() {
-    return <Register />
+  renderView({ view }: HttpContext) {
+    return view.render('pages/auth/register')
   }
 
   async handleForm({ auth, request, response }: HttpContext) {

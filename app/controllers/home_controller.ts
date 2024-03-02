@@ -1,5 +1,5 @@
 import BookingDates from '#models/booking_dates'
-import { Home } from '#views/pages/home'
+import { HttpContext } from '@adonisjs/core/http'
 
 // export default class HomeController {
 //   async renderView() {
@@ -15,14 +15,12 @@ import { Home } from '#views/pages/home'
 // }
 
 export default class HomeController {
-  async renderView() {
+  async renderView({ view }: HttpContext) {
     const dates = await BookingDates.query()
       .select('batchId')
       .select('dateAvailable')
       .groupBy('batchId', 'dateAvailable')
       .distinct('batchId', 'dateAvailable')
-
-    console.log(dates)
 
     const groupedDates = dates.reduce(
       (acc, booking) => {
@@ -42,8 +40,6 @@ export default class HomeController {
       [] as { batchId: string; dates: string[] }[]
     )
 
-    console.log(groupedDates)
-
-    return <Home dates={groupedDates} />
+    return view.render('pages/home')
   }
 }

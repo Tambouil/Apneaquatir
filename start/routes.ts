@@ -8,15 +8,14 @@
 */
 
 import router from '@adonisjs/core/services/router'
-// import { Home } from '#views/pages/home'
 import { middleware } from './kernel.js'
 
 const HomeController = () => import('#controllers/home_controller')
-const RegisterController = () => import('#controllers/register.controller')
-const LoginController = () => import('#controllers/login.controller')
-const LogoutController = () => import('#controllers/logout.controller')
+const RegisterController = () => import('#controllers/register_controller')
+const LoginController = () => import('#controllers/login_controller')
+const LogoutController = () => import('#controllers/logout_controller')
 
-const BookingDatesController = () => import('#controllers/booking_dates.controller')
+const BookingDatesController = () => import('#controllers/booking_dates_controller')
 
 router.get('/', [HomeController, 'renderView'])
 

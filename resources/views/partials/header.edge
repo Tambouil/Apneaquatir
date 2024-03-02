@@ -1,0 +1,25 @@
+<header class="bg-white shadow" layout-header>
+  <div class="container mx-auto">
+    <div class="flex h-16 items-center justify-between">
+      <div class="flex items-center">
+        <a class="block text-teal-600" href="/" title="Go to homepage" up-target="[layout-main]">
+          <span class="sr-only">Accueil</span>
+          @include('partials/logo')
+        </a>
+
+        <div class="ml-8">
+          <a
+            href="{{ route('booking.create') }}"
+            class="rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-teal-600"
+            up-target="[layout-main]"
+            up-preload
+          >
+            + Nouveau mois
+          </a>
+        </div>
+      </div>
+
+      @include('partials/header_nav')
+    </div>
+  </div>
+</header>

@@ -1,10 +1,9 @@
 import User from '#models/user'
-import Login from '#views/auth/login'
 import type { HttpContext } from '@adonisjs/core/http'
 
 export default class LoginController {
-  renderView() {
-    return <Login />
+  renderView({ view }: HttpContext) {
+    return view.render('pages/auth/login')
   }
 
   async handleForm({ auth, request, response }: HttpContext) {
