@@ -1,16 +1,26 @@
 @component('layouts/auth', { title: 'Se connecter' , description:'description' })
-  <form action="#" class="mt-8 grid grid-cols-6 gap-6" up-target="[layout-root]" up-fail-target="[layout-main]">
+  <form
+    action="{{ route('auth.login') }}"
+    method="POST"
+    class="mt-8 grid grid-cols-6 gap-6"
+    up-target="[layout-root]"
+    up-fail-target="[layout-main]"
+    >
+    {{ csrfField() }}
+    @error('E_INVALID_CREDENTIALS')
+    <div role="alert" class="col-span-6 bg-red-100 text-red-800 dark:bg-red-800 dark:text-red-100 text-sm rounded p-3 mb-4">
+      Identifiants invalides
+    </div>
+    @end
     <div class="col-span-6">
       @form.control({
         name: 'email',
-        errorKey: 'auth.errors.uid'
       })
         <div class="block text-sm font-medium text-gray-700">
           @!form.label({ title: 'Adresse Email' })
         </div>
         <div>
           @!form.input({ type: 'email', placeholder: 'Email' })
-          @!form.error()
         </div>
       @end
     </div>
@@ -18,14 +28,12 @@
     <div class="col-span-6">
       @form.control({
         name: 'password',
-        errorKey: 'auth.errors.password'
       })
         <div class="block text-sm font-medium text-gray-700">
           @!form.label({ title: 'Mot de passe' })
         </div>
         <div>
           @!form.input({ type: 'password', placeholder: 'Mot de passe' })
-          @!form.error()
         </div>
       @end
     </div>

@@ -1,5 +1,12 @@
 @component('layouts/auth', { title: 'S\'inscrire' , description:'description' })
-  <form action="#" class="mt-8 grid grid-cols-6 gap-6" up-target="[layout-root]" up-fail-target="[layout-main]">
+  <form
+    action="{{ route('auth.register') }}"
+    method="POST"
+    class="mt-8 grid grid-cols-6 gap-6"
+    up-target="[layout-root]"
+    up-fail-target="[layout-main]"
+    >
+    {{ csrfField() }}
     <div class="col-span-6 sm:col-span-3">
       @form.control({
         name: 'firstName',
@@ -58,7 +65,7 @@
 
     <div class="col-span-6 sm:col-span-3">
       @form.control({
-        name: 'passwordConfirm',
+        name: 'passwordConfirmation',
       })
         <div class="block text-sm font-medium text-gray-700">
           @!form.label({ title: 'Confirmation de mot de passe' })

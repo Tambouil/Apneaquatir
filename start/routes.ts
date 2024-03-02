@@ -18,12 +18,12 @@ const LogoutController = () => import('#controllers/logout_controller')
 const BookingDatesController = () => import('#controllers/booking_dates_controller')
 
 router.get('/', [HomeController, 'renderView'])
-
 router
   .group(() => {
-    router.delete('logout', [LogoutController]).as('auth.logout')
+    router.delete('logout', [LogoutController, 'handle']).as('auth.logout')
   })
   .middleware([middleware.auth()])
+
 router
   .group(() => {
     router.get('register', [RegisterController, 'renderView'])

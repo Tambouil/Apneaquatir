@@ -16,5 +16,5 @@
 @let(classes = 'text-red-600 mt-1.5 ml-1.5 text-sm font-medium')
 
 @if(errorMessage)
-  <p {{ $props.toAttrs({ class: classes }, false) }}> {{ errorMessage }} </p>
+  <p {{ $props.merge({ class: classes }).toAttrs() }}> {{ errorMessage }} </p>
 @end

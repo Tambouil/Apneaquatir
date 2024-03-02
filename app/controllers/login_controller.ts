@@ -1,8 +1,10 @@
 import User from '#models/user'
+
 import type { HttpContext } from '@adonisjs/core/http'
 
 export default class LoginController {
-  renderView({ view }: HttpContext) {
+  renderView({ session, view }: HttpContext) {
+    console.log(session.flashMessages.all())
     return view.render('pages/auth/login')
   }
 
