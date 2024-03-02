@@ -1,8 +1,12 @@
-import 'unpoly'
 import Alpine from 'alpinejs'
 import focus from '@alpinejs/focus'
 import teleport from 'alpine-teleport'
 
+import flatpickr from 'flatpickr'
+import { French } from 'flatpickr/dist/l10n/fr.js'
+import 'flatpickr/dist/themes/material_green.css'
+
+import 'unpoly'
 import 'unpoly/unpoly.css'
 import '../css/app.css'
 

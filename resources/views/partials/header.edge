@@ -41,6 +41,29 @@
                     <form
                       method="POST"
                     >
+                    {{ csrfField() }}
+                    <div
+                      x-data
+                      x-init="
+                      flatpickr($refs.dateInput, {
+                        mode: 'multiple',
+                        'locale': 'fr',
+                        altInput: false,
+                        altFormat: 'F j, Y',
+                        dateFormat: 'Y-m-d'
+                      })
+                    "
+                      class="p-4"
+                    >
+                    <input
+                      name="dateInput"
+                      x-ref="dateInput"
+                      type="text"
+                      placeholder="Cliquez ici"
+                      class="w-full"
+                    />
+                  </div>
+
                       <div class="flex justify-end">
                         <button
                           type="cancel"
