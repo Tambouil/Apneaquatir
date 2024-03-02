@@ -23,6 +23,14 @@
     </div>
 @else
   <div class="relative" x-data="{ opened: false }">
+    <button @click.prevent="opened = !opened" @click.away="opened = false">
+      <div
+        class="pill-rounded pill-rounded-small bg-cover"
+        style="background-image: url('https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg');"
+        >
+      </div>
+    </button>
+
     <div class="dropdown" x-show="opened">
       <ul>
         <li>
@@ -32,11 +40,10 @@
             up-target="[layout-main]"
             up-preload
             @click="opened = false"
-          > Mon profil </a>
+          > My profile </a>
         </li>
 
         <li>
-          {{-- Logout request should not use the GET method --}}
           <form action="{{ `${route('auth.logout')}?_method=delete` }}" method="POST" x-data="{}">
             {{ csrfField() }}
             <button

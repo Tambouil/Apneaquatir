@@ -55,6 +55,7 @@
     "tailwindcss": "^3.4.1",
     "ts-node": "^10.9.2",
     "typescript": "^5.3.3",
+    "unpoly": "^3.7.3",
     "vite": "^5.0.12"
   },
   "dependencies": {
@@ -65,8 +66,11 @@
     "@adonisjs/shield": "^8.1.0",
     "@adonisjs/static": "^1.1.1",
     "@adonisjs/vite": "^2.0.2",
+    "@alpinejs/focus": "^3.13.5",
     "@types/uuid": "^9.0.8",
     "@vinejs/vine": "^1.7.1",
+    "alpine-teleport": "^1.0.1",
+    "alpinejs": "^3.13.5",
     "edge.js": "^6.0.1",
     "luxon": "^3.4.4",
     "pg": "^8.11.3",
