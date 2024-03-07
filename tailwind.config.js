@@ -11,6 +11,7 @@ export default {
     },
     minWidth: {
       240: '240px',
+      full: '100%',
     },
     extend: {},
   },
