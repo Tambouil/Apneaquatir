@@ -1,13 +1,15 @@
+import React from 'react'
 import { Head } from '@inertiajs/react'
+import { Toaster } from '../components/ui/toaster'
 
 interface Props {
   title: string
-  children: JSX.Element
+  children: React.ReactNode
 }
 
 export const Layout = ({ title, children }: Props) => {
   return (
-    <div className="font-sans mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
+    <div className="font-sans container px-4 sm:px-6 lg:px-8">
       <Head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -37,6 +39,7 @@ export const Layout = ({ title, children }: Props) => {
           </p>
         </div>
       </footer>
+      <Toaster />
     </div>
   )
 }

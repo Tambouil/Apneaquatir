@@ -6,8 +6,7 @@ export default class extends BaseSchema {
   async up() {
     this.schema.createTable(this.tableName, (table) => {
       table.uuid('id').primary().defaultTo(this.db.rawQuery('gen_random_uuid()').knexQuery)
-      table.string('batch_id').notNullable()
-      table.string('date_available').notNullable()
+      table.jsonb('date_available').notNullable().defaultTo([])
       table.timestamp('created_at', { useTz: false })
       table.timestamp('updated_at', { useTz: false })
     })

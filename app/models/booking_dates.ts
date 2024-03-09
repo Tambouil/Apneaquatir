@@ -9,11 +9,8 @@ export default class BookingDates extends BaseModel {
   @column({ isPrimary: true })
   declare id: BookingDatesId
 
-  @column()
-  declare batchId: string
-
-  @column()
-  declare dateAvailable: string
+  @column({ prepare: (value) => JSON.stringify(value) })
+  declare dateAvailable: string[]
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime

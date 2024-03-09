@@ -11,7 +11,7 @@
     "prefix": ""
   },
   "aliases": {
-    "components": "./inertia/components",
-    "utils": "./inertia/utils/utils"
+    "components": "inertia/components",
+    "utils": "inertia/utils/utils"
   }
 }
