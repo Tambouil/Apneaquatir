@@ -3,8 +3,8 @@ import { createRegisterValidator } from '#validators/user'
 import { HttpContext } from '@adonisjs/core/http'
 
 export default class RegisterController {
-  renderView({ view }: HttpContext) {
-    return view.render('pages/auth/register')
+  renderView({ inertia }: HttpContext) {
+    return inertia.render('auth/register')
   }
 
   async handleForm({ auth, request, response }: HttpContext) {

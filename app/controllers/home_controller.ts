@@ -3,7 +3,7 @@ import User from '#models/user'
 import { HttpContext } from '@adonisjs/core/http'
 
 export default class HomeController {
-  async renderView({ view }: HttpContext) {
+  async renderView({ inertia }: HttpContext) {
     const users = await User.all()
     const dates = await BookingDates.query()
       .select('batchId')
@@ -29,6 +29,6 @@ export default class HomeController {
       [] as { batchId: string; dates: string[] }[]
     )
 
-    return view.render('pages/home', { groupedDates, users })
+    return inertia.render('home')
   }
 }
