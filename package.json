@@ -75,7 +75,6 @@
     "@radix-ui/react-popover": "^1.0.7",
     "@radix-ui/react-slot": "^1.0.2",
     "@radix-ui/react-toast": "^1.1.5",
-    "@types/uuid": "^9.0.8",
     "@vinejs/vine": "^1.7.1",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
@@ -88,8 +87,7 @@
     "react-dom": "^18.2.0",
     "reflect-metadata": "^0.2.1",
     "tailwind-merge": "^2.2.1",
-    "tailwindcss-animate": "^1.0.7",
-    "uuid": "^9.0.1"
+    "tailwindcss-animate": "^1.0.7"
   },
   "eslintConfig": {
     "extends": "@adonisjs/eslint-config/app"
