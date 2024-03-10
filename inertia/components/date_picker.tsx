@@ -101,7 +101,7 @@ export function DatePicker({ className }: React.HTMLAttributes<HTMLDivElement>) 
               </AlertDialogCancel>
               <AlertDialogAction
                 onClick={() => {
-                  post('/', {
+                  post('/booking', {
                     onSuccess: () => {
                       setShowAlertDialog(false)
                       reset()

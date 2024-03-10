@@ -3,11 +3,11 @@ import { createRegisterValidator } from '#validators/user'
 import { HttpContext } from '@adonisjs/core/http'
 
 export default class RegisterController {
-  renderView({ inertia }: HttpContext) {
+  async create({ inertia }: HttpContext) {
     return inertia.render('auth/register')
   }
 
-  async handleForm({ auth, request, response }: HttpContext) {
+  async store({ auth, request, response }: HttpContext) {
     const payload = await request.validateUsing(createRegisterValidator)
     const user = await User.create(payload)
     await auth.use('web').login(user)
