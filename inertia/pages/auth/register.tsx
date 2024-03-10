@@ -36,7 +36,7 @@ export default function Login() {
                 <Input
                   id="firstName"
                   type="text"
-                  placeholder="Prénom"
+                  placeholder="prénom"
                   disabled={processing}
                   value={data.firstName}
                   onChange={(e) => setData('firstName', e.target.value)}
@@ -54,7 +54,7 @@ export default function Login() {
                 <Input
                   id="lastName"
                   type="text"
-                  placeholder="Nom"
+                  placeholder="nom"
                   disabled={processing}
                   value={data.lastName}
                   onChange={(e) => setData('lastName', e.target.value)}
@@ -113,7 +113,7 @@ export default function Login() {
               <Input
                 id="passwordConfirmation"
                 type="password"
-                placeholder="Confirmer le mot de passe"
+                placeholder="confirmer le mot de passe"
                 autoCapitalize="none"
                 autoCorrect="off"
                 disabled={processing}
