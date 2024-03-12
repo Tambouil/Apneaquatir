@@ -14,12 +14,15 @@ const HomeController = () => import('#controllers/home_controller')
 const LoginController = () => import('#controllers/login_controller')
 const RegisterController = () => import('#controllers/register_controller')
 const BookingDatesController = () => import('#controllers/booking_dates_controller')
+const BookingResponsesController = () => import('#controllers/booking_responses_controller')
 
 router
   .group(() => {
     router.get('/', [HomeController, 'create'])
+    router.get('/booking', [HomeController, 'show'])
     router.delete('logout', [LoginController, 'destroy'])
     router.post('/booking', [BookingDatesController, 'store'])
+    router.post('/booking/choices', [BookingResponsesController, 'store'])
   })
   .middleware([middleware.auth()])
 

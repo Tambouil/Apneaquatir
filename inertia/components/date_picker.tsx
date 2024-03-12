@@ -25,7 +25,7 @@ export function DatePicker({ className }: React.HTMLAttributes<HTMLDivElement>) 
   const [showAlertDialog, setShowAlertDialog] = React.useState(false)
 
   const { data, setData, post, errors, processing, reset } = useForm({
-    dates: [new Date()] as Date[] | undefined,
+    dates: [new Date(2024, 3, 23)] as Date[] | undefined,
   })
   const { toast } = useToast()
 
@@ -36,7 +36,7 @@ export function DatePicker({ className }: React.HTMLAttributes<HTMLDivElement>) 
 
   return (
     <form className={cn('flex gap-2', className)} onSubmit={handleSubmit}>
-      <Label className="sr-only" htmlFor="email">
+      <Label className="sr-only" htmlFor="dates">
         Dates
       </Label>
       {errors.dates && (

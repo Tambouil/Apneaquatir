@@ -1,11 +1,15 @@
-import BookingDates from '#models/booking_dates'
+import BookingDates from '#models/booking_date'
 import { HttpContext } from '@adonisjs/core/http'
 
 export default class BookingDatesController {
   async store({ request, response }: HttpContext) {
-    const { dates } = request.all()
+    const { dates } = request.only(['dates'])
 
-    await BookingDates.create({ dateAvailable: dates })
+    const dateRecords = dates.map((date: string) => ({ dateAvailable: date }))
+
+    await BookingDates.query().update({ isArchived: true })
+
+    await BookingDates.createMany(dateRecords)
 
     return response.redirect().back()
   }
