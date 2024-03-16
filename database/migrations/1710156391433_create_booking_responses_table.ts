@@ -1,3 +1,4 @@
+import { UserChoices } from '#enums/user_choices'
 import { BaseSchema } from '@adonisjs/lucid/schema'
 
 export default class extends BaseSchema {
@@ -6,10 +7,15 @@ export default class extends BaseSchema {
   async up() {
     this.schema.createTable(this.tableName, (table) => {
       table.uuid('id').primary().defaultTo(this.db.rawQuery('gen_random_uuid()').knexQuery)
-      table.uuid('user_id').references('id').inTable('users').onDelete('CASCADE')
-      table.uuid('booking_date_id').references('id').inTable('booking_dates').onDelete('CASCADE')
-      table.enum('user_participation', ['yes', 'no', 'not_specified']).notNullable()
-
+      table.uuid('user_id').references('id').inTable('users').notNullable().onDelete('CASCADE')
+      table
+        .uuid('booking_date_id')
+        .references('id')
+        .inTable('booking_dates')
+        .notNullable()
+        .onDelete('CASCADE')
+      table.integer('user_participation').notNullable().defaultTo(UserChoices.NotSpecified)
+      table.boolean('is_archived').notNullable().defaultTo(false)
       table.timestamp('created_at')
       table.timestamp('updated_at')
     })

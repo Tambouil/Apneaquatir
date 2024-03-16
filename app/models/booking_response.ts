@@ -1,11 +1,9 @@
-import type { UserId } from './user.js'
-import type { BookingDatesId } from './booking_date.js'
 import type { BelongsTo } from '@adonisjs/lucid/types/relations'
-import { DateTime } from 'luxon'
 import { BaseModel, belongsTo, column } from '@adonisjs/lucid/orm'
 import { Opaque } from '@adonisjs/core/types/helpers'
-import BookingDates from './booking_date.js'
-import User from './user.js'
+import User, { type UserId } from '#models/user'
+import BookingDate, { type BookingDateId } from '#models/booking_date'
+import { DateTime } from 'luxon'
 
 export type BookingResponseId = Opaque<'BookingResponseId', string>
 
@@ -17,10 +15,13 @@ export default class BookingResponse extends BaseModel {
   declare userId: UserId
 
   @column()
-  declare bookingDateId: BookingDatesId
+  declare bookingDateId: BookingDateId
 
   @column()
-  declare userParticipation: 'yes' | 'no' | 'not_specified'
+  declare userParticipation: number
+
+  @column({ consume: (value) => !!value })
+  declare isArchived: boolean
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
@@ -31,6 +32,6 @@ export default class BookingResponse extends BaseModel {
   @belongsTo(() => User)
   declare user: BelongsTo<typeof User>
 
-  @belongsTo(() => BookingDates)
-  declare bookingDate: BelongsTo<typeof BookingDates>
+  @belongsTo(() => BookingDate)
+  declare bookingDate: BelongsTo<typeof BookingDate>
 }
