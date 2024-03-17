@@ -4,10 +4,11 @@ import { Label } from '../../components/ui/label'
 import { Input } from '../../components/ui/input'
 import { Button, buttonVariants } from '../../components/ui/button'
 import { Icons } from '../../components/icon'
-import { Link, useForm } from '@inertiajs/react'
+import { Link, useForm, usePage } from '@inertiajs/react'
 
 export default function Login() {
-  const { data, setData, post, errors, processing } = useForm({
+  const flash: any = usePage().props.flash
+  const { data, setData, post, processing } = useForm({
     email: '',
     password: '',
   })
@@ -16,6 +17,7 @@ export default function Login() {
     event.preventDefault()
     post('/login')
   }
+
   return (
     <AuthLayout
       title="Se connecter"
@@ -24,15 +26,14 @@ export default function Login() {
     >
       <div className="grid gap-6">
         <form onSubmit={handleSubmit}>
-          {Object.keys(errors).length > 0 && (
+          {flash.errors?.auth && (
             <div
               role="alert"
               className="col-span-6 bg-red-100 text-red-800 text-sm rounded p-3 mb-4"
             >
-              <p className="text-base font-medium">Identifiants invalides</p>
+              <p className="text-base font-medium">{flash.errors.auth}</p>
             </div>
           )}
-
           <div className="grid gap-2">
             <div className="grid gap-1">
               <Label className="sr-only" htmlFor="email">

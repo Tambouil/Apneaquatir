@@ -12,7 +12,7 @@ export default defineConfig({
    */
   sharedData: {
     user: (ctx: HttpContext) => ctx.auth?.user,
-    errors: (ctx: HttpContext) => ctx.session.flashMessages.get('errors'),
+    flash: (ctx) => ctx.session?.flashMessages.all(),
   },
 
   /**
