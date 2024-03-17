@@ -83,83 +83,57 @@ export const BookingTable = (props: Props) => {
   }
 
   return (
-    <Table>
-      <TableCaption className="sr-only">Créneaux de la fosse Loic Leferme</TableCaption>
-      <TableHeader>
-        <TableRow>
-          {headers.map((header, index) => (
-            <TableHead key={index} className="font-medium">
-              {header}
-            </TableHead>
-          ))}
-        </TableRow>
-      </TableHeader>
-      <TableBody>
-        <TableRow>
-          <TableCell className="font-medium">
-            {currentUser.firstName} {currentUser.lastName}
-          </TableCell>
-          {datesAvailable.map((_date, index) => (
-            <TableCell key={index}>
-              {editMode ? (
-                <Select
-                  defaultValue={
-                    currentUser.choices[index]?.userChoice?.toString() ||
-                    UserChoices.NotSpecified.toString()
-                  }
-                  onValueChange={(value) => handleSelectChange(index, value)}
-                >
-                  <SelectTrigger className="w-full max-w-[180px]">
-                    <SelectValue placeholder="Choisir" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value={UserChoices.Yes.toString()}>Présent</SelectItem>
-                    <SelectItem value={UserChoices.No.toString()}>Absent</SelectItem>
-                    <SelectItem value={UserChoices.NotSpecified.toString()}>
-                      Non renseigné
-                    </SelectItem>
-                  </SelectContent>
-                </Select>
-              ) : currentUser.choices[index]?.userChoice === UserChoices.Yes ? (
-                <p className="flex items-center">
-                  <span className="font-medium">Présent</span>{' '}
-                  <Icons.check className="w-4 h-4 text-green-500 ml-2" />
-                </p>
-              ) : currentUser.choices[index]?.userChoice === UserChoices.No ? (
-                <p className="flex items-center">
-                  <span className="font-medium">Absent</span>{' '}
-                  <Icons.cross className="w-4 h-4 text-red-500 ml-2" />
-                </p>
-              ) : (
-                <p className="text-muted-foreground">Non renseigné</p>
-              )}
-            </TableCell>
-          ))}
-
-          <TableCell className="text-end">
-            {editMode ? (
-              <form onSubmit={handleSubmit}>
-                <Button type="submit">Sauvegarder</Button>
-              </form>
-            ) : (
-              <Button onClick={() => setEditMode(true)}>Modifier</Button>
-            )}
-          </TableCell>
-        </TableRow>
-
-        {usersWithChoices.map((usersWithChoice) => (
-          <TableRow key={usersWithChoice.id}>
+    <div className="rounded-md border">
+      <Table className="text-xs sm:text-sm">
+        <TableCaption className="sr-only">Créneaux de la fosse Loic Leferme</TableCaption>
+        <TableHeader>
+          <TableRow>
+            {headers.map((header, index) => (
+              <TableHead key={index} className="font-medium">
+                {header}
+              </TableHead>
+            ))}
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          <TableRow className="bg-muted/20">
             <TableCell className="font-medium">
-              {usersWithChoice.firstName} {usersWithChoice.lastName}
+              {currentUser.firstName} {currentUser.lastName}
             </TableCell>
             {datesAvailable.map((_date, index) => (
               <TableCell key={index}>
-                {usersWithChoice.choices[index].userChoice === UserChoices.Yes ? (
+                {editMode ? (
+                  <Select
+                    defaultValue={
+                      currentUser.choices[index]?.userChoice?.toString() ||
+                      UserChoices.NotSpecified.toString()
+                    }
+                    onValueChange={(value) => handleSelectChange(index, value)}
+                  >
+                    <SelectTrigger className="w-full max-w-[180px] h-8 rounded-md px-3 text-xs sm:text-sm">
+                      <SelectValue placeholder="Choisir" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem className="text-xs sm:text-sm" value={UserChoices.Yes.toString()}>
+                        Présent
+                      </SelectItem>
+                      <SelectItem className="text-xs sm:text-sm" value={UserChoices.No.toString()}>
+                        Absent
+                      </SelectItem>
+                      <SelectItem
+                        className="text-xs sm:text-sm"
+                        value={UserChoices.NotSpecified.toString()}
+                      >
+                        Non renseigné
+                      </SelectItem>
+                    </SelectContent>
+                  </Select>
+                ) : currentUser.choices[index]?.userChoice === UserChoices.Yes ? (
                   <p className="flex items-center">
                     <span className="font-medium">Présent</span>{' '}
                     <Icons.check className="w-4 h-4 text-green-500 ml-2" />
                   </p>
-                ) : usersWithChoice.choices[index].userChoice === UserChoices.No ? (
+                ) : currentUser.choices[index]?.userChoice === UserChoices.No ? (
                   <p className="flex items-center">
                     <span className="font-medium">Absent</span>{' '}
                     <Icons.cross className="w-4 h-4 text-red-500 ml-2" />
@@ -169,24 +143,107 @@ export const BookingTable = (props: Props) => {
                 )}
               </TableCell>
             ))}
+
+            <TableCell className="text-end">
+              {editMode ? (
+                <form onSubmit={handleSubmit}>
+                  <Button type="submit" size={'sm'}>
+                    Sauvegarder
+                  </Button>
+                </form>
+              ) : (
+                <Button size={'sm'} onClick={() => setEditMode(true)}>
+                  Modifier
+                </Button>
+              )}
+            </TableCell>
+          </TableRow>
+
+          {usersWithChoices.map((usersWithChoice) => (
+            <TableRow key={usersWithChoice.id}>
+              <TableCell className="font-medium">
+                {usersWithChoice.firstName} {usersWithChoice.lastName}
+              </TableCell>
+              {datesAvailable.map((_date, index) => (
+                <TableCell key={index}>
+                  {usersWithChoice.choices[index].userChoice === UserChoices.Yes ? (
+                    <p className="flex items-center">
+                      <span className="font-medium">Présent</span>{' '}
+                      <Icons.check className="w-4 h-4 text-green-500 ml-2" />
+                    </p>
+                  ) : usersWithChoice.choices[index].userChoice === UserChoices.No ? (
+                    <p className="flex items-center">
+                      <span className="font-medium">Absent</span>{' '}
+                      <Icons.cross className="w-4 h-4 text-red-500 ml-2" />
+                    </p>
+                  ) : (
+                    <p className="text-muted-foreground">Non renseigné</p>
+                  )}
+                </TableCell>
+              ))}
+              <TableCell></TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+
+        <TableFooter>
+          <TableRow>
+            <TableCell className="font-medium">Total</TableCell>
+            {datesAvailable.map((_date, index) => (
+              <TableCell key={index}>
+                {usersWithChoices.filter(
+                  (user) => user.choices[index].userChoice === UserChoices.Yes
+                ).length +
+                  (currentUser.choices[index]?.userChoice === UserChoices.Yes ? 1 : 0)}{' '}
+                / {users.length}
+              </TableCell>
+            ))}
             <TableCell></TableCell>
           </TableRow>
-        ))}
-      </TableBody>
-
-      <TableFooter>
-        <TableRow>
-          <TableCell className="font-medium">Total</TableCell>
-          {datesAvailable.map((_date, index) => (
-            <TableCell key={index}>
-              {usersWithChoices.filter((user) => user.choices[index].userChoice === UserChoices.Yes)
-                .length + (currentUser.choices[index]?.userChoice === UserChoices.Yes ? 1 : 0)}{' '}
-              / {users.length}
-            </TableCell>
-          ))}
-          <TableCell></TableCell>
-        </TableRow>
-      </TableFooter>
-    </Table>
+        </TableFooter>
+      </Table>
+    </div>
   )
 }
+// ;<div className="space-y-4">
+//   <DataTableToolbar table={table} />
+//   <div className="rounded-md border">
+//     <Table>
+//       <TableHeader>
+//         {table.getHeaderGroups().map((headerGroup) => (
+//           <TableRow key={headerGroup.id}>
+//             {headerGroup.headers.map((header) => {
+//               return (
+//                 <TableHead key={header.id} colSpan={header.colSpan}>
+//                   {header.isPlaceholder
+//                     ? null
+//                     : flexRender(header.column.columnDef.header, header.getContext())}
+//                 </TableHead>
+//               )
+//             })}
+//           </TableRow>
+//         ))}
+//       </TableHeader>
+//       <TableBody>
+//         {table.getRowModel().rows?.length ? (
+//           table.getRowModel().rows.map((row) => (
+//             <TableRow key={row.id} data-state={row.getIsSelected() && 'selected'}>
+//               {row.getVisibleCells().map((cell) => (
+//                 <TableCell key={cell.id}>
+//                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
+//                 </TableCell>
+//               ))}
+//             </TableRow>
+//           ))
+//         ) : (
+//           <TableRow>
+//             <TableCell colSpan={columns.length} className="h-24 text-center">
+//               No results.
+//             </TableCell>
+//           </TableRow>
+//         )}
+//       </TableBody>
+//     </Table>
+//   </div>
+//   <DataTablePagination table={table} />
+// </div>

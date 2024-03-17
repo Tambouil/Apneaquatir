@@ -32,7 +32,7 @@ export const AuthLayout = ({ title, heading, description, children }: Props) => 
                 className="absolute inset-0 h-full w-full object-cover opacity-80"
               />
               <div className="hidden lg:relative lg:block lg:p-12">
-                <Link className="block text-white" href="/">
+                <Link className="block text-white" href="/login">
                   <span className="sr-only">Home</span>
                   <svg
                     className="h-8 sm:h-10"
@@ -62,8 +62,8 @@ export const AuthLayout = ({ title, heading, description, children }: Props) => 
               <div className="max-w-xl lg:max-w-3xl">
                 <div className="relative -mt-16 block lg:hidden">
                   <Link
-                    className="inline-flex size-16 items-center justify-center rounded-full bg-white text-blue-600 sm:size-20"
-                    href="#"
+                    className="inline-flex size-16 items-center justify-center rounded-full bg-white text-teal-600 sm:size-20"
+                    href="/login"
                   >
                     <span className="sr-only">Home</span>
                     <svg

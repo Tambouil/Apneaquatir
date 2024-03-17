@@ -13,6 +13,7 @@ import {
   DropdownMenuTrigger,
 } from './ui/dropdown_menu.js'
 import User from '#models/user'
+import { Icons } from './icon.js'
 
 export function UserNav() {
   const { user } = usePage<{ user: User }>().props
@@ -49,15 +50,19 @@ export function UserNav() {
         <DropdownMenuGroup>
           <DropdownMenuItem>
             Profil
-            <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
+            <DropdownMenuShortcut>
+              <Icons.user className="w-4 h-4" />
+            </DropdownMenuShortcut>
           </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuItem>
           <Link href="/logout" method="delete" as="button" onClick={handleSubmit}>
-            Log out
+            Déconnexion
           </Link>
-          <DropdownMenuShortcut>⌘L</DropdownMenuShortcut>
+          <DropdownMenuShortcut>
+            <Icons.logout className="w-4 h-4" />
+          </DropdownMenuShortcut>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
