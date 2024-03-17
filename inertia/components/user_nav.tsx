@@ -49,9 +49,9 @@ export function UserNav() {
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
           <DropdownMenuItem>
-            Profil
+            <Link href="/settings">Paramètres</Link>
             <DropdownMenuShortcut>
-              <Icons.user className="w-4 h-4" />
+              <Icons.settings className="w-4 h-4" />
             </DropdownMenuShortcut>
           </DropdownMenuItem>
         </DropdownMenuGroup>

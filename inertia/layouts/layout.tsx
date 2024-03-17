@@ -1,6 +1,7 @@
 import React from 'react'
 import { Head } from '@inertiajs/react'
 import { Toaster } from '../components/ui/toaster'
+import { Separator } from '../components/ui/separator'
 
 interface Props {
   title: string
@@ -23,7 +24,8 @@ export const Layout = ({ title, children }: Props) => {
         <title>{title}</title>
       </Head>
       {children}
-      <footer className="border-t border-gray-300 text-sm">
+      <Separator />
+      <footer className="text-sm">
         <div className="flex items-center justify-between h-24">
           <p>
             <a href="" className="font-medium underline">
