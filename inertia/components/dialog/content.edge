@@ -1,7 +1,0 @@
-<template x-if="opened">
-  <template x-teleport="#modals-container">
-    <div {{ $props.toAttrs() }}>
-      {{{ await $slots.main() }}}
-    </div>
-  </template>
-</template>
