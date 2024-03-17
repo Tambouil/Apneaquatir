@@ -1,105 +1,122 @@
-import User from '#models/user'
-import { useState, FormEvent } from 'react'
+import { useState, FormEvent, useCallback } from 'react'
+import { useForm } from '@inertiajs/react'
+import { UserChoices } from '#enums/user_choices'
+import { Props } from 'pages/home'
 import { Button } from './ui/button'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select'
 import { Icons } from './icon'
+import { useToast } from './ui/use_toast'
 import {
   Table,
-  TableBody,
-  TableCaption,
-  TableCell,
-  TableHead,
   TableHeader,
+  TableHead,
+  TableBody,
   TableRow,
+  TableCell,
+  TableCaption,
+  TableFooter,
 } from './ui/table'
-import { useForm } from '@inertiajs/react'
-
-interface FormattedDate {
-  bookingDateId: string
-  formattedDate: string
-  choice: string
-}
-
-interface Props {
-  user: User
-  datesAvailable: FormattedDate[]
-}
-
-// ... (autres imports)
 
 export const BookingTable = (props: Props) => {
-  const { user, datesAvailable } = props
-  const { post, data, setData } = useForm({
-    choices: datesAvailable.map((date) => ({ ...date, choice: '' })), // Utilisation de "choices" comme clé
-  })
+  const { currentUser, users, datesAvailable } = props
+  const { toast } = useToast()
 
   const [editMode, setEditMode] = useState(false)
+  const headers = ['Nom', ...datesAvailable.map((date) => date.dateAvailable.toLocaleString()), '']
+  const usersWithChoices = users.filter((user) => user.choices.length > 0)
 
-  const handleSelectChange = (index: number, value: string) => {
-    const updatedChoices = [...data.choices] // Utilisation de "choices"
-    updatedChoices[index] = { ...updatedChoices[index], choice: value }
-    setData('choices', updatedChoices) // Mise à jour de "choices" dans le state
+  const { data, setData, post } = useForm({
+    choices: datesAvailable.map((date) => {
+      return {
+        bookingDateId: date.id,
+        userChoice: currentUser.choices.find((choice) => choice.bookingDateId === date.id)
+          ?.userChoice,
+      }
+    }),
+  })
 
-    // Vous pouvez également utiliser setData sans fournir le champ spécifique
-    // setData(updatedChoices);
-  }
+  const handleSelectChange = useCallback(
+    (index: number, value: string) => {
+      const updatedData = [...data.choices]
+      updatedData[index].userChoice = Number(value)
+      setData('choices', updatedData)
+    },
+    [data, setData]
+  )
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault()
     setEditMode(false)
-    post('/booking/choices')
+    post('/booking/choices/' + currentUser.id, {
+      onSuccess: () => {
+        toast({
+          title: 'Vos choix ont été enregistrés',
+          description: 'Vous pouvez à tout moment les modifier',
+        })
+      },
+      onError: () => {
+        toast({
+          title: 'Une erreur est survenue',
+          description: 'Veuillez réessayer',
+        })
+      },
+    })
   }
-
-  const headers = ['nom', ...datesAvailable.map((date) => date.formattedDate), '']
 
   return (
     <Table>
-      <TableCaption className="sr-only">Dates de réservation du mois de mars 2024</TableCaption>
+      <TableCaption className="sr-only">Créneaux de la fosse Loic Leferme</TableCaption>
       <TableHeader>
         <TableRow>
           {headers.map((header, index) => (
-            <TableHead key={index}>{header}</TableHead>
+            <TableHead key={index} className="font-medium">
+              {header}
+            </TableHead>
           ))}
         </TableRow>
       </TableHeader>
       <TableBody>
         <TableRow>
           <TableCell className="font-medium">
-            {user.firstName} {''}
-            {user.lastName}
+            {currentUser.firstName} {currentUser.lastName}
           </TableCell>
-          {datesAvailable.map(({}, index: number) => (
+          {datesAvailable.map((_date, index) => (
             <TableCell key={index}>
               {editMode ? (
                 <Select
-                  value={data.choices[index].choice || ''}
+                  defaultValue={
+                    currentUser.choices[index]?.userChoice.toString() ||
+                    UserChoices.NotSpecified.toString()
+                  }
                   onValueChange={(value) => handleSelectChange(index, value)}
                 >
-                  <SelectTrigger className="w-full">
+                  <SelectTrigger className="w-full max-w-[180px]">
                     <SelectValue placeholder="Choisir" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="yes">
-                      <Icons.check className="w-6 h-6 text-green-500" />
-                    </SelectItem>
-                    <SelectItem value="no">
-                      <Icons.cross className="w-6 h-6 text-red-500" />
+                    <SelectItem value={UserChoices.Yes.toString()}>Présent</SelectItem>
+                    <SelectItem value={UserChoices.No.toString()}>Absent</SelectItem>
+                    <SelectItem value={UserChoices.NotSpecified.toString()}>
+                      Non renseigné
                     </SelectItem>
                   </SelectContent>
                 </Select>
+              ) : currentUser.choices[index]?.userChoice === UserChoices.Yes ? (
+                <p className="flex items-center">
+                  <span className="font-medium">Présent</span>{' '}
+                  <Icons.check className="w-4 h-4 text-green-500 ml-2" />
+                </p>
+              ) : currentUser.choices[index]?.userChoice === UserChoices.No ? (
+                <p className="flex items-center">
+                  <span className="font-medium">Absent</span>{' '}
+                  <Icons.cross className="w-4 h-4 text-red-500 ml-2" />
+                </p>
               ) : (
-                <span>
-                  {data.choices[index].choice === 'yes' ? (
-                    <Icons.check className="w-6 h-6 text-green-500" />
-                  ) : data.choices[index].choice === 'no' ? (
-                    <Icons.cross className="w-6 h-6 text-red-500" />
-                  ) : (
-                    'Non spécifié'
-                  )}
-                </span>
+                <p className="text-muted-foreground">Non renseigné</p>
               )}
             </TableCell>
           ))}
+
           <TableCell className="text-end">
             {editMode ? (
               <form onSubmit={handleSubmit}>
@@ -110,7 +127,49 @@ export const BookingTable = (props: Props) => {
             )}
           </TableCell>
         </TableRow>
+
+        {usersWithChoices.map((usersWithChoice) => (
+          <TableRow key={usersWithChoice.id}>
+            <TableCell className="font-medium">
+              {usersWithChoice.firstName} {usersWithChoice.lastName}
+            </TableCell>
+            {datesAvailable.map((_date, index) => (
+              <TableCell key={index}>
+                {usersWithChoice.choices[index].userChoice === UserChoices.Yes ? (
+                  <p className="flex items-center">
+                    <span className="font-medium">Présent</span>{' '}
+                    <Icons.check className="w-4 h-4 text-green-500 ml-2" />
+                  </p>
+                ) : usersWithChoice.choices[index].userChoice === UserChoices.No ? (
+                  <p className="flex items-center">
+                    <span className="font-medium">Absent</span>{' '}
+                    <Icons.cross className="w-4 h-4 text-red-500 ml-2" />
+                  </p>
+                ) : (
+                  <p className="text-muted-foreground">Non renseigné</p>
+                )}
+              </TableCell>
+            ))}
+            <TableCell></TableCell>
+          </TableRow>
+        ))}
       </TableBody>
+
+      <TableFooter>
+        <TableRow>
+          <TableCell className="font-medium">Total</TableCell>
+          {datesAvailable.map((_date, index) => (
+            <TableCell key={index}>
+              {
+                usersWithChoices.filter(
+                  (user) => user.choices[index].userChoice === UserChoices.Yes
+                ).length
+              }
+            </TableCell>
+          ))}
+          <TableCell></TableCell>
+        </TableRow>
+      </TableFooter>
     </Table>
   )
 }

@@ -1,53 +1,55 @@
-import BookingDates from '#models/booking_date'
 import { inject } from '@adonisjs/core'
 import { HttpContext } from '@adonisjs/core/http'
 import { DatePresenter } from '../presenters/dates.js'
+import User from '#models/user'
+import BookingDate from '#models/booking_date'
 
 @inject()
 export default class HomeController {
   constructor(private datePresenter: DatePresenter) {}
 
-  /**
-   * Display a list of resource
-   */
-  async index({}: HttpContext) {}
+  async index({ inertia, response, auth }: HttpContext) {
+    const currentUser = auth.getUserOrFail()
 
-  /**
-   * Display form to create a new record
-   */
-  async create({ inertia }: HttpContext) {
-    const activeDates = await BookingDates.query()
+    if (!currentUser) {
+      return response.unauthorized()
+    }
+
+    const currentDatesAvailable = await BookingDate.query()
       .select('id', 'dateAvailable')
       .where('isArchived', false)
-      .orderBy('created_at', 'desc')
+      .orderBy('dateAvailable', 'asc')
+    const formattedDates = this.datePresenter.formatDates(currentDatesAvailable)
+
+    const users = await User.query()
+      .select('id', 'firstName', 'lastName')
+      .where('id', '<>', currentUser.id)
+      .preload('choices', (query) => {
+        query
+          .select('bookingDateId', 'userChoice')
+          .where('isArchived', false)
+          .orderBy('created_at', 'asc')
+      })
+
+    const currentUserWithBookings = await User.query()
+      .preload('bookings', (query) => {
+        query.select('dateAvailable').where('isArchived', false).orderBy('dateAvailable', 'asc')
+      })
+      .preload('choices', (query) => {
+        query
+          .select('bookingDateId', 'userChoice')
+          .where('isArchived', false)
+          .orderBy('created_at', 'asc')
+      })
+      .where('id', currentUser.id)
 
     return inertia.render('home', {
-      datesAvailable: this.datePresenter.formatDates(activeDates),
+      datesAvailable: formattedDates,
+      users,
+      currentUser: currentUserWithBookings.map((user) => ({
+        ...user.toJSON(),
+        bookings: this.datePresenter.formatDates(user.bookings),
+      }))[0],
     })
   }
-
-  /**
-   * Handle form submission for the create action
-   */
-  async store({ request }: HttpContext) {}
-
-  /**
-   * Show individual record
-   */
-  async show({ params }: HttpContext) {}
-
-  /**
-   * Edit individual record
-   */
-  async edit({ params }: HttpContext) {}
-
-  /**
-   * Handle form submission for the edit action
-   */
-  async update({ params, request }: HttpContext) {}
-
-  /**
-   * Delete record
-   */
-  async destroy({ params }: HttpContext) {}
 }

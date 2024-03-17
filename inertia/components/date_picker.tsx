@@ -1,13 +1,15 @@
 import React from 'react'
 import { CalendarIcon } from '@radix-ui/react-icons'
-import { useForm } from '@inertiajs/react'
+import { useForm, usePage } from '@inertiajs/react'
 import { format } from 'date-fns'
+import { UserId } from '#models/user'
 import { Popover, PopoverContent, PopoverTrigger } from './ui/popover'
 import { cn } from '../utils/utils'
 import { Button } from './ui/button'
 import { Calendar } from './ui/calendar'
 import { Label } from './ui/label'
 import { Icons } from './icon'
+import { useToast } from './ui/use_toast'
 import {
   AlertDialog,
   AlertDialogTrigger,
@@ -19,14 +21,14 @@ import {
   AlertDialogCancel,
   AlertDialogAction,
 } from './ui/alert_dialog'
-import { useToast } from './ui/use_toast'
 
 export function DatePicker({ className }: React.HTMLAttributes<HTMLDivElement>) {
   const [showAlertDialog, setShowAlertDialog] = React.useState(false)
-
   const { data, setData, post, errors, processing, reset } = useForm({
-    dates: [new Date(2024, 3, 23)] as Date[] | undefined,
+    dates: [new Date()] as Date[] | undefined,
   })
+
+  const { user } = usePage().props
   const { toast } = useToast()
 
   function handleSubmit(event: React.FormEvent) {
@@ -58,9 +60,9 @@ export function DatePicker({ className }: React.HTMLAttributes<HTMLDivElement>) 
               : data.dates?.map((date, index) => (
                   <span key={index}>
                     {format(date, 'LLL dd, y')}
-                    {data.dates && index !== data.dates.length - 1 && ' - '}
+                    {data.dates && index !== data.dates?.length - 1 && ' - '}
                   </span>
-                )) || <span>Pick a date</span>}
+                )) || <span>Sélectionnez une date</span>}
           </Button>
         </PopoverTrigger>
         <PopoverContent className="w-auto p-0" align="end">
@@ -77,7 +79,7 @@ export function DatePicker({ className }: React.HTMLAttributes<HTMLDivElement>) 
 
       <AlertDialog>
         <AlertDialogTrigger asChild>
-          <Button type="submit">
+          <Button type="submit" disabled={data.dates?.length === 0}>
             {processing && <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />}
             Nouveau tableau
           </Button>
@@ -89,7 +91,7 @@ export function DatePicker({ className }: React.HTMLAttributes<HTMLDivElement>) 
             </AlertDialogHeader>
             <AlertDialogDescription>
               Êtes-vous sûr de vouloir créer un nouveau tableau ? <br />
-              Le tableau précent sera archivé
+              <span className="underline">Les précédentes dates seront archivées</span>
             </AlertDialogDescription>
             <AlertDialogFooter>
               <AlertDialogCancel
@@ -101,7 +103,7 @@ export function DatePicker({ className }: React.HTMLAttributes<HTMLDivElement>) 
               </AlertDialogCancel>
               <AlertDialogAction
                 onClick={() => {
-                  post('/booking', {
+                  post('/booking/dates/' + (user as { id: UserId })?.id, {
                     onSuccess: () => {
                       setShowAlertDialog(false)
                       reset()

@@ -1,8 +1,8 @@
 import BookingDate from '#models/booking_date'
 import Factory from '@adonisjs/lucid/factories'
 import { DateTime } from 'luxon'
-import { BookingResponseFactory } from './booking_response_factory.js'
 import { UserFactory } from './user_factory.js'
+import { BookingChoiceFactory } from './booking_choice_factory.js'
 
 export const BookingDateFactory = Factory.define(BookingDate, () => {
   return {
@@ -10,5 +10,5 @@ export const BookingDateFactory = Factory.define(BookingDate, () => {
   }
 })
   .relation('user', () => UserFactory)
-  .relation('userResponses', () => BookingResponseFactory)
+  .relation('userChoices', () => BookingChoiceFactory)
   .build()

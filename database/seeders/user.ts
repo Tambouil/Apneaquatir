@@ -23,7 +23,7 @@ export default class DatabaseSeeder {
 
     await BookingDateFactory.client(trx)
       .merge({ userId: admin.id })
-      .with('userResponses', 1, (response) => response.merge({ userId: admin.id }))
+      .with('userChoices', 1, (response) => response.merge({ userId: admin.id }))
       .create()
 
     await UserFactory.client(trx).merge({ password: 'secret' }).createMany(5)

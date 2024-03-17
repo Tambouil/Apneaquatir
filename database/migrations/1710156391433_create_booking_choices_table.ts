@@ -2,7 +2,7 @@ import { UserChoices } from '#enums/user_choices'
 import { BaseSchema } from '@adonisjs/lucid/schema'
 
 export default class extends BaseSchema {
-  protected tableName = 'booking_responses'
+  protected tableName = 'booking_choices'
 
   async up() {
     this.schema.createTable(this.tableName, (table) => {
@@ -14,7 +14,7 @@ export default class extends BaseSchema {
         .inTable('booking_dates')
         .notNullable()
         .onDelete('CASCADE')
-      table.integer('user_participation').notNullable().defaultTo(UserChoices.NotSpecified)
+      table.integer('user_choice').notNullable().defaultTo(UserChoices.NotSpecified)
       table.boolean('is_archived').notNullable().defaultTo(false)
       table.timestamp('created_at')
       table.timestamp('updated_at')

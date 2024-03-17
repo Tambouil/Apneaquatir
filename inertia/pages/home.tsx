@@ -1,24 +1,32 @@
 import User from '#models/user'
+import BookingDate, { type BookingDateId } from '#models/booking_date'
 import { Header } from '../components/header.js'
 import { Layout } from '../layouts/layout.js'
 import { DatePicker } from '../components/date_picker.js'
 import { BookingTable } from '../components/booking_table.js'
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card.js'
-import { Icons } from 'components/icon.js'
+import { Icons } from '../components/icon.js'
 
-interface FormattedDate {
-  formattedDate: string
-  bookingDateId: string
-  choice: string
+interface Choice {
+  bookingDateId: BookingDateId
+  userChoice: number
 }
 
-interface Props {
-  user: User
-  datesAvailable: FormattedDate[] // Mettons à jour le type des dates disponibles
+interface CurrentUser {
+  id: number
+  firstName: string
+  lastName: string
+  choices: Choice[]
+}
+
+export interface Props {
+  currentUser: CurrentUser
+  users: User[]
+  datesAvailable: BookingDate[]
 }
 
 export default function Home(props: Props) {
-  const { datesAvailable, user } = props
+  const { datesAvailable } = props
 
   return (
     <Layout title="Accueil">
@@ -29,8 +37,8 @@ export default function Home(props: Props) {
           <DatePicker />
         </div>
         <div className="space-y4">
-          {datesAvailable ? (
-            <BookingTable datesAvailable={datesAvailable} user={user} />
+          {datesAvailable.length > 0 ? (
+            <BookingTable {...props} />
           ) : (
             <Card>
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">

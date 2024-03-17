@@ -1,7 +1,7 @@
 import User from '#models/user'
 import Factory from '@adonisjs/lucid/factories'
 import { BookingDateFactory } from '#database/factories/booking_date_factory'
-import { BookingResponseFactory } from '#database/factories/booking_response_factory'
+import { BookingChoiceFactory } from '#database/factories/booking_choice_factory'
 
 export const UserFactory = Factory.define(User, ({ faker }) => {
   return {
@@ -12,5 +12,5 @@ export const UserFactory = Factory.define(User, ({ faker }) => {
   }
 })
   .relation('bookings', () => BookingDateFactory)
-  .relation('participations', () => BookingResponseFactory)
+  .relation('choices', () => BookingChoiceFactory)
   .build()

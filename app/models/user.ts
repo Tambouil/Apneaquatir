@@ -6,7 +6,7 @@ import { compose } from '@adonisjs/core/helpers'
 import { BaseModel, column, hasMany } from '@adonisjs/lucid/orm'
 import { DateTime } from 'luxon'
 
-import BookingResponse from './booking_response.js'
+import BookingChoice from './booking_choice.js'
 import BookingDate from './booking_date.js'
 
 const AuthFinder = withAuthFinder(() => hash.use('scrypt'), {
@@ -44,6 +44,6 @@ export default class User extends compose(BaseModel, AuthFinder) {
   @hasMany(() => BookingDate)
   declare bookings: HasMany<typeof BookingDate>
 
-  @hasMany(() => BookingResponse)
-  declare participations: HasMany<typeof BookingResponse>
+  @hasMany(() => BookingChoice)
+  declare choices: HasMany<typeof BookingChoice>
 }

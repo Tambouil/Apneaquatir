@@ -5,11 +5,11 @@ import User, { type UserId } from '#models/user'
 import BookingDate, { type BookingDateId } from '#models/booking_date'
 import { DateTime } from 'luxon'
 
-export type BookingResponseId = Opaque<'BookingResponseId', string>
+export type BookingChoiceId = Opaque<'BookingChoiceId', string>
 
-export default class BookingResponse extends BaseModel {
+export default class BookingChoice extends BaseModel {
   @column({ isPrimary: true })
-  declare id: BookingResponseId
+  declare id: BookingChoiceId
 
   @column()
   declare userId: UserId
@@ -18,7 +18,7 @@ export default class BookingResponse extends BaseModel {
   declare bookingDateId: BookingDateId
 
   @column()
-  declare userParticipation: number
+  declare userChoice: number
 
   @column({ consume: (value) => !!value })
   declare isArchived: boolean
