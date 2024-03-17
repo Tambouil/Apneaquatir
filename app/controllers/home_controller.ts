@@ -31,25 +31,31 @@ export default class HomeController {
           .orderBy('created_at', 'asc')
       })
 
-    const currentUserWithBookings = await User.query()
-      .preload('bookings', (query) => {
-        query.select('dateAvailable').where('isArchived', false).orderBy('dateAvailable', 'asc')
-      })
+    const currentUserWithChoices = await User.query()
       .preload('choices', (query) => {
         query
           .select('bookingDateId', 'userChoice')
           .where('isArchived', false)
-          .orderBy('created_at', 'asc')
+          .orderBy('bookingDateId', 'asc')
       })
       .where('id', currentUser.id)
+      .firstOrFail()
+
+    const mappedDates = currentDatesAvailable.map((date) => {
+      const choice = currentUserWithChoices.choices.find((ch) => ch.bookingDateId === date.id)
+      return {
+        ...date.toJSON(),
+        userChoice: choice ? choice.userChoice : null,
+      }
+    })
 
     return inertia.render('home', {
       datesAvailable: formattedDates,
       users,
-      currentUser: currentUserWithBookings.map((user) => ({
-        ...user.toJSON(),
-        bookings: this.datePresenter.formatDates(user.bookings),
-      }))[0],
+      currentUser: {
+        ...currentUserWithChoices.toJSON(),
+        choices: mappedDates,
+      },
     })
   }
 }

@@ -21,6 +21,6 @@ export default class BookingChoicesController {
 
     await BookingChoice.updateOrCreateMany(['bookingDateId', 'userId'], updates)
 
-    response.redirect().back()
+    return response.redirect().back()
   }
 }

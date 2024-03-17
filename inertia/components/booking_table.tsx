@@ -1,4 +1,4 @@
-import { useState, FormEvent, useCallback } from 'react'
+import { type FormEvent, useState, useEffect, useMemo, useCallback } from 'react'
 import { useForm } from '@inertiajs/react'
 import { UserChoices } from '#enums/user_choices'
 import { Props } from 'pages/home'
@@ -22,24 +22,43 @@ export const BookingTable = (props: Props) => {
   const { toast } = useToast()
 
   const [editMode, setEditMode] = useState(false)
-  const headers = ['Nom', ...datesAvailable.map((date) => date.dateAvailable.toLocaleString()), '']
+  const headers = useMemo(
+    () => ['Nom', ...datesAvailable.map((date) => date.dateAvailable.toLocaleString()), ''],
+    [datesAvailable]
+  )
   const usersWithChoices = users.filter((user) => user.choices.length > 0)
 
+  const initialData = useMemo(
+    () =>
+      datesAvailable.map((date) => {
+        return {
+          bookingDateId: date.id,
+          userChoice: currentUser.choices.find((choice) => choice.bookingDateId === date.id)
+            ?.userChoice,
+        }
+      }),
+    [datesAvailable, currentUser.choices]
+  )
+
   const { data, setData, post } = useForm({
-    choices: datesAvailable.map((date) => {
+    choices: initialData,
+  })
+
+  useEffect(() => {
+    const updatedData = datesAvailable.map((date) => {
       return {
         bookingDateId: date.id,
         userChoice: currentUser.choices.find((choice) => choice.bookingDateId === date.id)
           ?.userChoice,
       }
-    }),
-  })
+    })
+    setData('choices', updatedData)
+  }, [datesAvailable, currentUser.choices])
 
   const handleSelectChange = useCallback(
     (index: number, value: string) => {
-      const updatedData = [...data.choices]
-      updatedData[index].userChoice = Number(value)
-      setData('choices', updatedData)
+      data.choices[index].userChoice = Number(value)
+      setData('choices', [...data.choices])
     },
     [data, setData]
   )
@@ -85,7 +104,7 @@ export const BookingTable = (props: Props) => {
               {editMode ? (
                 <Select
                   defaultValue={
-                    currentUser.choices[index]?.userChoice.toString() ||
+                    currentUser.choices[index]?.userChoice?.toString() ||
                     UserChoices.NotSpecified.toString()
                   }
                   onValueChange={(value) => handleSelectChange(index, value)}
@@ -160,11 +179,9 @@ export const BookingTable = (props: Props) => {
           <TableCell className="font-medium">Total</TableCell>
           {datesAvailable.map((_date, index) => (
             <TableCell key={index}>
-              {
-                usersWithChoices.filter(
-                  (user) => user.choices[index].userChoice === UserChoices.Yes
-                ).length
-              }
+              {usersWithChoices.filter((user) => user.choices[index].userChoice === UserChoices.Yes)
+                .length + (currentUser.choices[index]?.userChoice === UserChoices.Yes ? 1 : 0)}{' '}
+              / {users.length}
             </TableCell>
           ))}
           <TableCell></TableCell>

@@ -6,7 +6,10 @@ import { BookingChoiceFactory } from './booking_choice_factory.js'
 
 export const BookingDateFactory = Factory.define(BookingDate, () => {
   return {
-    dateAvailable: DateTime.local().plus({ days: Math.floor(Math.random() * 30) }),
+    dateAvailable: DateTime.now()
+      .plus({ days: Math.floor(Math.random() * 30) })
+      .endOf('day')
+      .toUTC(),
   }
 })
   .relation('user', () => UserFactory)
