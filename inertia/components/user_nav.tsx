@@ -1,5 +1,5 @@
 import type { FormEvent } from 'react'
-import { useForm } from '@inertiajs/react'
+import { Link, useForm, usePage } from '@inertiajs/react'
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar.js'
 import { Button } from './ui/button.js'
 import {
@@ -12,8 +12,10 @@ import {
   DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from './ui/dropdown_menu.js'
+import User from '#models/user'
 
 export function UserNav() {
+  const { user } = usePage<{ user: User }>().props
   const { delete: destroy } = useForm()
 
   function handleSubmit(e: FormEvent) {
@@ -25,43 +27,37 @@ export function UserNav() {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" className="relative h-8 w-8 rounded-full">
-          <Avatar className="h-8 w-8">
-            <AvatarImage
-              src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
-              alt="avatar"
-            />
-            <AvatarFallback>SC</AvatarFallback>
+          <Avatar>
+            <AvatarImage src="/assets/avatars/02.png" alt="avatar" />
+            <AvatarFallback>
+              {user.firstName.charAt(0)}
+              {user.lastName.charAt(0)}
+            </AvatarFallback>
           </Avatar>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56" align="end" forceMount>
         <DropdownMenuLabel className="font-normal">
           <div className="flex flex-col space-y-1">
-            <p className="text-sm font-medium leading-none">shadcn</p>
-            <p className="text-xs leading-none text-muted-foreground">m@example.com</p>
+            <p className="text-sm font-medium leading-none">
+              {user.firstName} {user.lastName}
+            </p>
+            <p className="text-xs leading-none text-muted-foreground">{user.email}</p>
           </div>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
           <DropdownMenuItem>
-            Profile
+            Profil
             <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
           </DropdownMenuItem>
-          <DropdownMenuItem>
-            Billing
-            <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
-          </DropdownMenuItem>
-          <DropdownMenuItem>
-            Settings
-            <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
-          </DropdownMenuItem>
-          <DropdownMenuItem>New Team</DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuItem>
-          <form onSubmit={handleSubmit}>
-            <Button type="submit">Log out</Button>
-          </form>
+          <Link href="/logout" method="delete" as="button" onClick={handleSubmit}>
+            Log out
+          </Link>
+          <DropdownMenuShortcut>⌘L</DropdownMenuShortcut>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
