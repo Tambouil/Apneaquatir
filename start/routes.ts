@@ -34,7 +34,7 @@ router
 
     // booking
     router.post('/booking/dates/:id', [BookingDatesController, 'store'])
-    router.delete('/booking/dates/', [BookingDatesController, 'destroy'])
+    router.put('/booking/dates/', [BookingDatesController, 'update'])
     router.post('/booking/choices/:id', [BookingChoicesController, 'store'])
   })
   .middleware([middleware.auth()])

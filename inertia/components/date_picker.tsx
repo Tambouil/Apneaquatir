@@ -25,7 +25,7 @@ import {
 
 export function DatePicker({ className }: React.HTMLAttributes<HTMLDivElement>) {
   const { data, setData, post, errors, processing, reset } = useForm({
-    dates: [new Date()] as Date[] | undefined,
+    dates: undefined as Date[] | undefined,
   })
 
   const { user } = usePage<{ user: User }>().props
@@ -71,7 +71,6 @@ export function DatePicker({ className }: React.HTMLAttributes<HTMLDivElement>) 
             defaultMonth={data.dates ? data.dates[0] : undefined}
             selected={data.dates}
             onSelect={(selectedDates) => setData('dates', selectedDates)}
-            numberOfMonths={2}
           />
         </PopoverContent>
       </Popover>

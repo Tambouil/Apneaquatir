@@ -1,6 +1,6 @@
 import type { BelongsTo, HasMany } from '@adonisjs/lucid/types/relations'
 import type { Opaque } from '@adonisjs/core/types/helpers'
-import { BaseModel, beforeCreate, belongsTo, column, hasMany } from '@adonisjs/lucid/orm'
+import { BaseModel, belongsTo, column, hasMany } from '@adonisjs/lucid/orm'
 import { DateTime } from 'luxon'
 import User, { type UserId } from '#models/user'
 import BookingChoice from '#models/booking_choice'
@@ -14,10 +14,6 @@ export default class BookingDate extends BaseModel {
   @column()
   declare userId: UserId
 
-  // @column.dateTime()
-  // declare dateAvailable: DateTime
-
-  // save date in Europe/Paris timezone
   @column.dateTime({ autoCreate: true, serializeAs: 'dateAvailable' })
   declare dateAvailable: DateTime
 
@@ -35,10 +31,4 @@ export default class BookingDate extends BaseModel {
 
   @hasMany(() => BookingChoice)
   declare userChoices: HasMany<typeof BookingChoice>
-
-  @beforeCreate()
-  static async archiveOldDates() {
-    await BookingDate.query().update({ isArchived: true })
-    await BookingChoice.query().update({ isArchived: true })
-  }
 }

@@ -6,7 +6,7 @@ import { Button } from './ui/button'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select'
 import { Icons } from './icon'
 import { useToast } from './ui/use_toast'
-import { DateEdit } from './date_edit'
+import { BookingManager } from './booking_manager'
 import {
   Table,
   TableHeader,
@@ -94,7 +94,7 @@ export const BookingTable = (props: Props) => {
                 {header}
               </TableHead>
             ))}
-            <DateEdit datesAvailable={datesAvailable} />
+            <BookingManager datesAvailable={datesAvailable} />
           </TableRow>
         </TableHeader>
         <TableBody>
