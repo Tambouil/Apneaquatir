@@ -23,7 +23,6 @@ import {
 } from './ui/alert_dialog'
 
 export function DatePicker({ className }: React.HTMLAttributes<HTMLDivElement>) {
-  const [showAlertDialog, setShowAlertDialog] = React.useState(false)
   const { data, setData, post, errors, processing, reset } = useForm({
     dates: [new Date()] as Date[] | undefined,
   })
@@ -33,7 +32,6 @@ export function DatePicker({ className }: React.HTMLAttributes<HTMLDivElement>) 
 
   function handleSubmit(event: React.FormEvent) {
     event.preventDefault()
-    setShowAlertDialog(true)
   }
 
   return (
@@ -84,43 +82,34 @@ export function DatePicker({ className }: React.HTMLAttributes<HTMLDivElement>) 
             Nouveau tableau
           </Button>
         </AlertDialogTrigger>
-        {showAlertDialog && (
-          <AlertDialogContent>
-            <AlertDialogHeader>
-              <AlertDialogTitle>Attention</AlertDialogTitle>
-            </AlertDialogHeader>
-            <AlertDialogDescription>
-              Êtes-vous sûr de vouloir créer un nouveau tableau ? <br />
-              <span className="underline">Les précédentes dates seront archivées</span>
-            </AlertDialogDescription>
-            <AlertDialogFooter>
-              <AlertDialogCancel
-                onClick={() => {
-                  setShowAlertDialog(false), reset()
-                }}
-              >
-                Annuler
-              </AlertDialogCancel>
-              <AlertDialogAction
-                onClick={() => {
-                  post('/booking/dates/' + user.id, {
-                    onSuccess: () => {
-                      setShowAlertDialog(false)
-                      reset()
-                      toast({
-                        title: 'Nouveau tableau créé avec succès 🎉',
-                        description:
-                          'Les nouvelles dates sont maintenant disponibles à la réservation',
-                      })
-                    },
-                  })
-                }}
-              >
-                Continuer
-              </AlertDialogAction>
-            </AlertDialogFooter>
-          </AlertDialogContent>
-        )}
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Attention</AlertDialogTitle>
+          </AlertDialogHeader>
+          <AlertDialogDescription>
+            Êtes-vous sûr de vouloir créer un nouveau tableau ? <br />
+            <span className="underline">Les précédentes dates seront archivées</span>
+          </AlertDialogDescription>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Annuler</AlertDialogCancel>
+            <AlertDialogAction
+              onClick={() => {
+                post('/booking/dates/' + user.id, {
+                  onSuccess: () => {
+                    reset()
+                    toast({
+                      title: 'Nouveau tableau créé avec succès 🎉',
+                      description:
+                        'Les nouvelles dates sont maintenant disponibles à la réservation',
+                    })
+                  },
+                })
+              }}
+            >
+              Continuer
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
       </AlertDialog>
     </form>
   )
