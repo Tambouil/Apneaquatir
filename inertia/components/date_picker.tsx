@@ -1,8 +1,8 @@
 import React from 'react'
+import User from '#models/user'
 import { CalendarIcon } from '@radix-ui/react-icons'
 import { useForm, usePage } from '@inertiajs/react'
 import { format } from 'date-fns'
-import { UserId } from '#models/user'
 import { Popover, PopoverContent, PopoverTrigger } from './ui/popover'
 import { cn } from '../utils/utils'
 import { Button } from './ui/button'
@@ -28,7 +28,7 @@ export function DatePicker({ className }: React.HTMLAttributes<HTMLDivElement>) 
     dates: [new Date()] as Date[] | undefined,
   })
 
-  const { user } = usePage().props
+  const { user } = usePage<{ user: User }>().props
   const { toast } = useToast()
 
   function handleSubmit(event: React.FormEvent) {
@@ -103,7 +103,7 @@ export function DatePicker({ className }: React.HTMLAttributes<HTMLDivElement>) 
               </AlertDialogCancel>
               <AlertDialogAction
                 onClick={() => {
-                  post('/booking/dates/' + (user as { id: UserId })?.id, {
+                  post('/booking/dates/' + user.id, {
                     onSuccess: () => {
                       setShowAlertDialog(false)
                       reset()
