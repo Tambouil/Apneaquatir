@@ -12,6 +12,6 @@ export default class RegisterController {
     const user = await User.create(payload)
     await auth.use('web').login(user)
 
-    return response.redirect('/')
+    return response.redirect().toPath('/')
   }
 }

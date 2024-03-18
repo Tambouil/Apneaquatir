@@ -23,6 +23,6 @@ export default class LoginController {
   async destroy({ response, auth }: HttpContext) {
     await auth.use('web').logout()
 
-    return response.redirect('/login')
+    return response.redirect().toPath('/login')
   }
 }
