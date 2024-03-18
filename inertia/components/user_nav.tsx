@@ -5,11 +5,9 @@ import { Button } from './ui/button.js'
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
-  DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from './ui/dropdown_menu.js'
 import User from '#models/user'
@@ -47,22 +45,24 @@ export function UserNav() {
           </div>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuGroup>
-          <DropdownMenuItem>
-            <Link href="/settings">Paramètres</Link>
-            <DropdownMenuShortcut>
-              <Icons.settings className="w-4 h-4" />
-            </DropdownMenuShortcut>
-          </DropdownMenuItem>
-        </DropdownMenuGroup>
+        <DropdownMenuItem>
+          <Link href="/settings" className="w-full">
+            Paramètres
+          </Link>
+          <Icons.settings className="w-4 h-4" />
+        </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem>
-          <Link href="/logout" method="delete" as="button" onClick={handleSubmit}>
+          <Link
+            as="button"
+            href="/logout"
+            method="delete"
+            onClick={handleSubmit}
+            className="w-full text-left"
+          >
             Déconnexion
           </Link>
-          <DropdownMenuShortcut>
-            <Icons.logout className="w-4 h-4" />
-          </DropdownMenuShortcut>
+          <Icons.logout className="w-4 h-4" />
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
