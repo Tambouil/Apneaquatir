@@ -3,6 +3,7 @@ import User from '#models/user'
 import { CalendarIcon } from '@radix-ui/react-icons'
 import { useForm, usePage } from '@inertiajs/react'
 import { format } from 'date-fns'
+import { fr } from 'date-fns/locale/fr'
 import { Popover, PopoverContent, PopoverTrigger } from './ui/popover'
 import { cn } from '../utils/utils'
 import { Button } from './ui/button'
@@ -54,10 +55,10 @@ export function DatePicker({ className }: React.HTMLAttributes<HTMLDivElement>) 
           >
             <CalendarIcon className="mr-2 h-4 w-4" />
             {data.dates?.length === 1
-              ? format(data.dates[0], 'LLL dd, y')
+              ? format(data.dates[0], 'dd LLLL', { locale: fr })
               : data.dates?.map((date, index) => (
                   <span key={index}>
-                    {format(date, 'LLL dd, y')}
+                    {format(date, 'dd LLLL', { locale: fr })}
                     {data.dates && index !== data.dates?.length - 1 && ' - '}
                   </span>
                 )) || <span>Sélectionnez une date</span>}
