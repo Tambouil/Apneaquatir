@@ -16,20 +16,31 @@ const RegisterController = () => import('#controllers/register_controller')
 const BookingDatesController = () => import('#controllers/booking_dates_controller')
 const BookingChoicesController = () => import('#controllers/booking_choices_controller')
 const SettingsController = () => import('#controllers/settings_controller')
+const AccountController = () => import('#controllers/account_controller')
 
 router
   .group(() => {
+    // home
     router.get('/', [HomeController, 'index'])
-    router.get('/settings', [SettingsController, 'index'])
+
+    // auth
     router.delete('logout', [LoginController, 'destroy'])
+
+    // user settings
+    router.get('/settings', [SettingsController, 'index'])
+    router.get('/account', [AccountController, 'index'])
+    router.put('/users/:id', [SettingsController, 'update'])
+    router.delete('/users/:id', [AccountController, 'destroy'])
+
+    // booking
     router.post('/booking/dates/:id', [BookingDatesController, 'store'])
     router.post('/booking/choices/:id', [BookingChoicesController, 'store'])
-    router.put('/users/:id', [SettingsController, 'update'])
   })
   .middleware([middleware.auth()])
 
 router
   .group(() => {
+    // auth
     router.get('register', [RegisterController, 'create'])
     router.post('register', [RegisterController, 'store'])
     router.get('login', [LoginController, 'create'])
