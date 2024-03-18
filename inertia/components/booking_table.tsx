@@ -6,6 +6,7 @@ import { Button } from './ui/button'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select'
 import { Icons } from './icon'
 import { useToast } from './ui/use_toast'
+import { DateEdit } from './date_edit'
 import {
   Table,
   TableHeader,
@@ -23,7 +24,7 @@ export const BookingTable = (props: Props) => {
 
   const [editMode, setEditMode] = useState(false)
   const headers = useMemo(
-    () => ['Nom', ...datesAvailable.map((date) => date.dateAvailable.toLocaleString()), ''],
+    () => ['Nom', ...datesAvailable.map((date) => date.dateAvailable.toLocaleString())],
     [datesAvailable]
   )
   const usersWithChoices = users.filter((user) => user.choices.length > 0)
@@ -93,6 +94,7 @@ export const BookingTable = (props: Props) => {
                 {header}
               </TableHead>
             ))}
+            <DateEdit datesAvailable={datesAvailable} />
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -205,45 +207,3 @@ export const BookingTable = (props: Props) => {
     </div>
   )
 }
-// ;<div className="space-y-4">
-//   <DataTableToolbar table={table} />
-//   <div className="rounded-md border">
-//     <Table>
-//       <TableHeader>
-//         {table.getHeaderGroups().map((headerGroup) => (
-//           <TableRow key={headerGroup.id}>
-//             {headerGroup.headers.map((header) => {
-//               return (
-//                 <TableHead key={header.id} colSpan={header.colSpan}>
-//                   {header.isPlaceholder
-//                     ? null
-//                     : flexRender(header.column.columnDef.header, header.getContext())}
-//                 </TableHead>
-//               )
-//             })}
-//           </TableRow>
-//         ))}
-//       </TableHeader>
-//       <TableBody>
-//         {table.getRowModel().rows?.length ? (
-//           table.getRowModel().rows.map((row) => (
-//             <TableRow key={row.id} data-state={row.getIsSelected() && 'selected'}>
-//               {row.getVisibleCells().map((cell) => (
-//                 <TableCell key={cell.id}>
-//                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
-//                 </TableCell>
-//               ))}
-//             </TableRow>
-//           ))
-//         ) : (
-//           <TableRow>
-//             <TableCell colSpan={columns.length} className="h-24 text-center">
-//               No results.
-//             </TableCell>
-//           </TableRow>
-//         )}
-//       </TableBody>
-//     </Table>
-//   </div>
-//   <DataTablePagination table={table} />
-// </div>
