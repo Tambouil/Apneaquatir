@@ -48,7 +48,12 @@ export default function Settings() {
   ]
 
   return (
-    <SettingsLayout title="Paramètres" sidebarNavItems={sidebarNavItems}>
+    <SettingsLayout
+      title="Paramètres"
+      subTitle="Paramètres"
+      description="Personnalisez les paramètres de votre compte"
+      sidebarNavItems={sidebarNavItems}
+    >
       <div className="space-y-6">
         <div>
           <h3 className="text-lg font-medium">Profil</h3>

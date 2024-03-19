@@ -11,7 +11,6 @@ import {
 } from './ui/alert_dialog'
 import { useEffect } from 'react'
 import BookingDate, { type BookingDateId } from '#models/booking_date'
-import { TableHead } from './ui/table'
 import { Button } from './ui/button'
 import { Icons } from './icon'
 import { Separator } from './ui/separator'
@@ -69,7 +68,7 @@ export const BookingManager = (props: Props) => {
   }
 
   return (
-    <TableHead className="text-end">
+    <div className="text-end">
       <AlertDialog>
         <AlertDialogTrigger asChild>
           <Button size={'sm'}>Modifier les dates</Button>
@@ -128,6 +127,6 @@ export const BookingManager = (props: Props) => {
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
-    </TableHead>
+    </div>
   )
 }

@@ -17,11 +17,15 @@ const BookingDatesController = () => import('#controllers/booking_dates_controll
 const BookingChoicesController = () => import('#controllers/booking_choices_controller')
 const SettingsController = () => import('#controllers/settings_controller')
 const AccountController = () => import('#controllers/account_controller')
+const AvailabilityController = () => import('#controllers/availability_controller')
+const InstructorController = () => import('#controllers/instructor_controller')
 
 router
   .group(() => {
     // home
     router.get('/', [HomeController, 'index'])
+    // instructor
+    router.get('/instructor', [InstructorController, 'index'])
 
     // auth
     router.delete('logout', [LoginController, 'destroy'])
@@ -37,6 +41,10 @@ router
     router.post('/booking/dates/:id', [BookingDatesController, 'store'])
     router.put('/booking/dates/', [BookingDatesController, 'update'])
     router.post('/booking/choices/:id', [BookingChoicesController, 'store'])
+
+    // availability
+    router.get('/availability', [AvailabilityController, 'index'])
+    router.post('/availability', [AvailabilityController, 'store'])
   })
   .middleware([middleware.auth()])
 

@@ -1,6 +1,12 @@
+import { usePage } from '@inertiajs/react'
 import { UserNav } from './user_nav.js'
 
 export const Header = () => {
+  const { url } = usePage()
+
+  const title = url === '/' ? 'Espace instructeurs' : 'Espace fosse'
+  const link = url === '/' ? '/instructor' : '/'
+
   return (
     <div className="border-b">
       <div className="flex h-16 items-center">
@@ -18,6 +24,15 @@ export const Header = () => {
           </svg>
           <span className="text-black text-xl">Apneaquatir</span>
         </a>
+        <nav>
+          <ul className="flex items-center space-x-4">
+            <li>
+              <a href={link} className="text-gray-600 hover:text-gray-800">
+                {title}
+              </a>
+            </li>
+          </ul>
+        </nav>
         <div className="ml-auto flex items-center space-x-4">
           <UserNav />
         </div>

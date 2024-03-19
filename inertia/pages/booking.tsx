@@ -5,11 +5,16 @@ import { SettingsLayout } from '../layouts/settings_layout'
 export default function Booking() {
   const sidebarNavItems = [
     { href: '/booking/dates', title: 'Fosse Loïc Leferme' },
-    { href: '', title: 'Disponibilités moniteurs' },
+    { href: '/availability', title: 'Disponibilités moniteurs' },
   ]
 
   return (
-    <SettingsLayout title="Gestion" sidebarNavItems={sidebarNavItems}>
+    <SettingsLayout
+      title="Gestion"
+      subTitle="Gestion des créneaux du club"
+      description="pour la fosse et les disponibilités des moniteurs"
+      sidebarNavItems={sidebarNavItems}
+    >
       <div className="space-y-6">
         <div>
           <h3 className="text-lg font-medium">Fosse Loïc Leferme</h3>
