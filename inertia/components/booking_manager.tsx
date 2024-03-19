@@ -87,7 +87,7 @@ export const BookingManager = (props: Props) => {
             <div key={date.id} className="flex items-center justify-between space-y-2">
               {date.dateAvailable.toLocaleString()}
               <Button size={'sm'} variant={'ghost'} onClick={() => handleDelete(date)}>
-                <Icons.cross className="w-4 h-4 text-red-500" />
+                <Icons.trash className="w-4 h-4 text-red-500" />
               </Button>
             </div>
           ))}
@@ -101,7 +101,7 @@ export const BookingManager = (props: Props) => {
               <Button
                 variant={'outline'}
                 className={cn(
-                  'w-[240px] pl-3 text-left font-normal',
+                  'w-full pl-3 text-left font-normal',
                   !data.newDate && 'text-muted-foreground'
                 )}
               >
