@@ -33,6 +33,7 @@ router
     router.delete('/users/:id', [AccountController, 'destroy'])
 
     // booking
+    router.get('/booking/dates', [BookingDatesController, 'index'])
     router.post('/booking/dates/:id', [BookingDatesController, 'store'])
     router.put('/booking/dates/', [BookingDatesController, 'update'])
     router.post('/booking/choices/:id', [BookingChoicesController, 'store'])

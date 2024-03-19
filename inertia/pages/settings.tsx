@@ -36,8 +36,19 @@ export default function Settings() {
     })
   }
 
+  const sidebarNavItems = [
+    {
+      title: 'Profil',
+      href: '/settings',
+    },
+    {
+      title: 'Compte',
+      href: '/account',
+    },
+  ]
+
   return (
-    <SettingsLayout title="Paramètres">
+    <SettingsLayout title="Paramètres" sidebarNavItems={sidebarNavItems}>
       <div className="space-y-6">
         <div>
           <h3 className="text-lg font-medium">Profil</h3>

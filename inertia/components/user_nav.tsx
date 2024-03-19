@@ -12,6 +12,7 @@ import {
 } from './ui/dropdown_menu.js'
 import User from '#models/user'
 import { Icons } from './icon.js'
+import { DropdownMenuGroup } from '@radix-ui/react-dropdown-menu'
 
 export function UserNav() {
   const { user } = usePage<{ user: User }>().props
@@ -45,12 +46,20 @@ export function UserNav() {
           </div>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuItem>
-          <Link href="/settings" className="w-full">
-            Paramètres
-          </Link>
-          <Icons.settings className="w-4 h-4" />
-        </DropdownMenuItem>
+        <DropdownMenuGroup>
+          <DropdownMenuItem>
+            <Link href="/booking/dates" className="w-full">
+              Nouvelles dates
+            </Link>
+            <Icons.add className="w-4 h-4" />
+          </DropdownMenuItem>
+          <DropdownMenuItem>
+            <Link href="/settings" className="w-full">
+              Paramètres
+            </Link>
+            <Icons.settings className="w-4 h-4" />
+          </DropdownMenuItem>
+        </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuItem>
           <Link

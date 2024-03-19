@@ -5,20 +5,10 @@ import { Head } from '@inertiajs/react'
 interface Props {
   title: string
   children: React.ReactNode
+  sidebarNavItems: { title: string; href: string }[]
 }
 
-export const SettingsLayout = ({ title, children }: Props) => {
-  const sidebarNavItems = [
-    {
-      title: 'Profil',
-      href: '/settings',
-    },
-    {
-      title: 'Compte',
-      href: '/account',
-    },
-  ]
-
+export const SettingsLayout = ({ title, children, sidebarNavItems }: Props) => {
   return (
     <>
       <Head>

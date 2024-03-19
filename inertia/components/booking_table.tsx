@@ -6,7 +6,6 @@ import { Button } from './ui/button'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select'
 import { Icons } from './icon'
 import { useToast } from './ui/use_toast'
-import { BookingManager } from './booking_manager'
 import {
   Table,
   TableHeader,
@@ -24,7 +23,7 @@ export const BookingTable = (props: Props) => {
 
   const [editMode, setEditMode] = useState(false)
   const headers = useMemo(
-    () => ['Nom', ...datesAvailable.map((date) => date.dateAvailable.toLocaleString())],
+    () => ['Nom', ...datesAvailable.map((date) => date.dateAvailable.toLocaleString()), ''],
     [datesAvailable]
   )
   const usersWithChoices = users.filter((user) => user.choices.length > 0)
@@ -94,7 +93,6 @@ export const BookingTable = (props: Props) => {
                 {header}
               </TableHead>
             ))}
-            <BookingManager datesAvailable={datesAvailable} />
           </TableRow>
         </TableHeader>
         <TableBody>

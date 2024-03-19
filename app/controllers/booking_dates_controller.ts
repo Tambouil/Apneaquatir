@@ -4,6 +4,10 @@ import BookingDates from '#models/booking_date'
 import { HttpContext } from '@adonisjs/core/http'
 
 export default class BookingDatesController {
+  async index({ inertia }: HttpContext) {
+    return inertia.render('booking')
+  }
+
   async store({ request, response, params }: HttpContext) {
     const dates = request.input('dates')
     const dateRecords = dates.map((date: Date) => ({ dateAvailable: date, userId: params.id }))
@@ -13,7 +17,7 @@ export default class BookingDatesController {
 
     await BookingDates.createMany(dateRecords)
 
-    return response.redirect().back()
+    return response.redirect().toPath('/')
   }
 
   async update({ request, response, auth }: HttpContext) {

@@ -18,17 +18,26 @@ import {
 } from '../components/ui/alert_dialog'
 
 export default function Account() {
-  const [showAlertDialog, setShowAlertDialog] = React.useState(false)
   const { user } = usePage<{ user: User }>().props
   const { delete: destroy, processing } = useForm()
 
   function handleDelete(event: React.FormEvent) {
     event.preventDefault()
-    setShowAlertDialog(true)
   }
 
+  const sidebarNavItems = [
+    {
+      title: 'Profil',
+      href: '/settings',
+    },
+    {
+      title: 'Compte',
+      href: '/account',
+    },
+  ]
+
   return (
-    <SettingsLayout title="Paramètres">
+    <SettingsLayout title="Paramètres" sidebarNavItems={sidebarNavItems}>
       <div className="space-y-6">
         <div>
           <h3 className="text-lg font-medium">Compte</h3>
@@ -61,34 +70,29 @@ export default function Account() {
               </Button>
             </form>
           </AlertDialogTrigger>
-          {showAlertDialog && (
-            <AlertDialogContent>
-              <AlertDialogHeader>
-                <AlertDialogTitle>Attention</AlertDialogTitle>
-              </AlertDialogHeader>
-              <AlertDialogDescription>
-                Êtes-vous sûr de vouloir supprimer votre compte ? <br />
-                <br />
-                <span className="underline">
-                  Cette action est irréversible et toutes vos données seront perdues.
-                </span>
-              </AlertDialogDescription>
-              <AlertDialogFooter>
-                <AlertDialogCancel onClick={() => setShowAlertDialog(false)}>
-                  Annuler
-                </AlertDialogCancel>
-                <AlertDialogAction
-                  className={buttonVariants({ variant: 'destructive' })}
-                  onClick={() => {
-                    setShowAlertDialog(false)
-                    destroy('/users/' + user.id)
-                  }}
-                >
-                  Supprimer
-                </AlertDialogAction>
-              </AlertDialogFooter>
-            </AlertDialogContent>
-          )}
+          <AlertDialogContent>
+            <AlertDialogHeader>
+              <AlertDialogTitle>Attention</AlertDialogTitle>
+            </AlertDialogHeader>
+            <AlertDialogDescription>
+              Êtes-vous sûr de vouloir supprimer votre compte ? <br />
+              <br />
+              <span className="underline">
+                Cette action est irréversible et toutes vos données seront perdues.
+              </span>
+            </AlertDialogDescription>
+            <AlertDialogFooter>
+              <AlertDialogCancel>Annuler</AlertDialogCancel>
+              <AlertDialogAction
+                className={buttonVariants({ variant: 'destructive' })}
+                onClick={() => {
+                  destroy('/users/' + user.id)
+                }}
+              >
+                Supprimer
+              </AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
         </AlertDialog>
       </div>
     </SettingsLayout>
