@@ -1,4 +1,4 @@
-import type { FormEvent } from 'react'
+import { type FormEvent } from 'react'
 import { AuthLayout } from '../../layouts/auth_layout'
 import { Label } from '../../components/ui/label'
 import { Input } from '../../components/ui/input'
@@ -6,7 +6,7 @@ import { Button, buttonVariants } from '../../components/ui/button'
 import { Icons } from '../../components/icon'
 import { Link, useForm } from '@inertiajs/react'
 
-export default function Login() {
+export default function Register() {
   const { data, setData, post, errors, processing } = useForm({
     firstName: '',
     lastName: '',
@@ -19,6 +19,7 @@ export default function Login() {
     event.preventDefault()
     post('/register')
   }
+
   return (
     <AuthLayout
       title="Inscription"
