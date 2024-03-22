@@ -6,6 +6,8 @@ import { BookingTable } from '../components/booking_table.js'
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card.js'
 import { Icons } from '../components/icon.js'
 import { BookingManager } from '../components/booking_manager.js'
+import { usePage } from '@inertiajs/react'
+import { UserRole } from '#enums/user_role'
 
 interface Choice {
   bookingDateId: BookingDateId
@@ -27,6 +29,7 @@ export interface Props {
 
 export default function Home(props: Props) {
   const { datesAvailable } = props
+  const { user } = usePage<{ user: User }>().props
 
   return (
     <Layout title="Accueil">
@@ -34,7 +37,9 @@ export default function Home(props: Props) {
       <div className="flex-1 space-y-4 py-8 pt-6">
         <div className="flex items-center justify-between space-y-2">
           <h2 className="block text-xl md:text-3xl font-bold tracking-tight">Espace fosse</h2>
-          <BookingManager datesAvailable={datesAvailable} />
+          {user.role === UserRole.Instructor && datesAvailable.length > 0 && (
+            <BookingManager datesAvailable={datesAvailable} />
+          )}
         </div>
 
         {datesAvailable.length > 0 ? (

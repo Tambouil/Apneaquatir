@@ -13,6 +13,7 @@ import {
 import User from '#models/user'
 import { Icons } from './icon.js'
 import { DropdownMenuGroup } from '@radix-ui/react-dropdown-menu'
+import { UserRole } from '#enums/user_role'
 
 export function UserNav() {
   const { user } = usePage<{ user: User }>().props
@@ -47,12 +48,14 @@ export function UserNav() {
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
-          <DropdownMenuItem>
-            <Link href="/booking/dates" className="w-full">
-              Nouvelles dates
-            </Link>
-            <Icons.add className="w-4 h-4" />
-          </DropdownMenuItem>
+          {user.role === UserRole.Instructor && (
+            <DropdownMenuItem>
+              <Link href="/booking/dates" className="w-full">
+                Nouvelles dates
+              </Link>
+              <Icons.add className="w-4 h-4" />
+            </DropdownMenuItem>
+          )}
           <DropdownMenuItem>
             <Link href="/settings" className="w-full">
               Paramètres
