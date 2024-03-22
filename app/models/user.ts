@@ -5,9 +5,11 @@ import { withAuthFinder } from '@adonisjs/auth'
 import { compose } from '@adonisjs/core/helpers'
 import { BaseModel, column, hasMany } from '@adonisjs/lucid/orm'
 import { DateTime } from 'luxon'
-
-import BookingChoice from './booking_choice.js'
-import BookingDate from './booking_date.js'
+import BookingChoice from '#models/booking_choice'
+import BookingDate from '#models/booking_date'
+import AvailabilityDate from '#models/availability_date'
+import TrainingAvailability from '#models/training_availability'
+import Instructoravailability from './instructor_availability.js'
 
 const AuthFinder = withAuthFinder(() => hash.use('scrypt'), {
   uids: ['email'],
@@ -46,4 +48,15 @@ export default class User extends compose(BaseModel, AuthFinder) {
 
   @hasMany(() => BookingChoice)
   declare choices: HasMany<typeof BookingChoice>
+
+  @hasMany(() => AvailabilityDate)
+  declare availabilities: HasMany<typeof AvailabilityDate>
+
+  @hasMany(() => TrainingAvailability)
+  declare trainingAvailabilities: HasMany<typeof TrainingAvailability>
+
+  @hasMany(() => Instructoravailability, {
+    foreignKey: 'instructorId',
+  })
+  declare instructorAvailabilities: HasMany<typeof Instructoravailability>
 }

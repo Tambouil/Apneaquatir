@@ -15,7 +15,7 @@ export default class UserService {
       })
   }
 
-  // Get the current user with their choices
+  // Get the current user with his choices
   async getCurrentUser(currentUser: User) {
     return await User.query()
       .preload('choices', (query) => {
@@ -28,7 +28,7 @@ export default class UserService {
       .firstOrFail()
   }
 
-  // Get the current user with their choices and the dates available
+  // Get the current user with his choices and the dates available
   async getCurrentUserWithChoicesAndDates(currentUser: User, currentDatesAvailable: BookingDate[]) {
     const currentUserWithChoices = await this.getCurrentUser(currentUser)
 

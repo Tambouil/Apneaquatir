@@ -26,6 +26,7 @@ router
     router.get('/', [HomeController, 'index'])
     // instructor
     router.get('/instructor', [InstructorController, 'index'])
+    router.post('/instructor', [InstructorController, 'store'])
 
     // auth
     router.delete('logout', [LoginController, 'destroy'])

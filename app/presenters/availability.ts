@@ -1,4 +1,5 @@
-import Availability from '#models/availability'
+import Availability from '#models/availability_date'
+import { DateTime } from 'luxon'
 
 export class AvailabilityPresenter {
   json(availabilities: Availability[]) {
@@ -9,5 +10,9 @@ export class AvailabilityPresenter {
         .setLocale('fr')
         .toFormat('EEEE dd MMMM'),
     }))
+  }
+
+  format(date: DateTime) {
+    return date.setZone('Europe/Paris').setLocale('fr').toFormat('EEEE dd MMMM')
   }
 }

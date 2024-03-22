@@ -10,7 +10,7 @@ export const Header = () => {
   return (
     <div className="border-b">
       <div className="flex h-16 items-center">
-        <a className="flex items-center text-teal-600 pr-4" href="#">
+        <a className="flex items-center text-teal-600 pr-4" href="/">
           <svg
             className="h-8 mr-4"
             viewBox="0 0 28 24"
@@ -22,7 +22,7 @@ export const Header = () => {
               fill="currentColor"
             />
           </svg>
-          <span className="text-black text-xl">Apneaquatir</span>
+          <span className="hidden sm:block text-black text-xl">Apneaquatir</span>
         </a>
         <nav>
           <ul className="flex items-center space-x-4">

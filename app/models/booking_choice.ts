@@ -1,6 +1,6 @@
+import type { Opaque } from '@adonisjs/core/types/helpers'
 import type { BelongsTo } from '@adonisjs/lucid/types/relations'
 import { BaseModel, belongsTo, column } from '@adonisjs/lucid/orm'
-import { Opaque } from '@adonisjs/core/types/helpers'
 import User, { type UserId } from '#models/user'
 import BookingDate, { type BookingDateId } from '#models/booking_date'
 import { DateTime } from 'luxon'

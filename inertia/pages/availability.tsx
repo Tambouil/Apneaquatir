@@ -1,5 +1,5 @@
 import React, { type FormEvent } from 'react'
-import { useForm } from '@inertiajs/react'
+import { useForm, usePage } from '@inertiajs/react'
 import { fr } from 'date-fns/locale/fr'
 import { format } from 'date-fns'
 import { CalendarIcon } from '@radix-ui/react-icons'
@@ -12,8 +12,10 @@ import { cn } from '../utils/utils'
 import { Label } from '../components/ui/label'
 import { Checkbox } from '../components/ui/checkbox'
 import { Badge } from '../components/ui/badge'
+import User, { type UserId } from '#models/user'
 
 export default function Availability() {
+  const { user } = usePage<{ user: User }>().props
   const sidebarNavItems = [
     { href: '/booking/dates', title: 'Fosse Loïc Leferme' },
     { href: '/availability', title: 'Disponibilités moniteurs' },
@@ -44,7 +46,7 @@ export default function Availability() {
   const { data, setData, post, reset } = useForm({
     newDate: undefined as Date | undefined,
     trainings: [] as string[],
-    datesWithTrainings: [] as { date: Date; trainings: string[] }[],
+    trainingAvailabilities: [] as { userId: UserId; date: Date; trainings: string[] }[],
   })
 
   const handleCheckboxChange = (checked: boolean, training: string) => {
@@ -55,11 +57,15 @@ export default function Availability() {
   }
 
   const handleAddDate = () => {
-    if (data.newDate) {
+    if (data.newDate && data.trainings.length > 0) {
       setData({
-        datesWithTrainings: [
-          ...data.datesWithTrainings,
-          { date: data.newDate, trainings: data.trainings },
+        trainingAvailabilities: [
+          ...data.trainingAvailabilities,
+          {
+            userId: user.id,
+            date: data.newDate,
+            trainings: data.trainings,
+          },
         ],
         newDate: undefined,
         trainings: [],
@@ -69,13 +75,14 @@ export default function Availability() {
 
   const handleRemoveDate = (date: Date) => {
     setData(
-      'datesWithTrainings',
-      data.datesWithTrainings.filter((d) => d.date !== date)
+      'trainingAvailabilities',
+      data.trainingAvailabilities.filter((d) => d.date !== date)
     )
   }
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault()
+    console.log(data.trainingAvailabilities)
     post('/availability', {
       onSuccess: () => {
         reset()
@@ -99,11 +106,11 @@ export default function Availability() {
           </p>
         </div>
 
-        {data.datesWithTrainings.length > 0 && (
+        {data.trainingAvailabilities.length > 0 && (
           <>
             <Separator />
             <div className="flex flex-wrap items-center space-x-2">
-              {data.datesWithTrainings.map((dateWithTraining, index) => (
+              {data.trainingAvailabilities.map((dateWithTraining, index) => (
                 <div key={index} className="p-2">
                   <p className="flex items-center space-x-2">
                     {format(dateWithTraining.date, 'dd LLLL', { locale: fr })}
@@ -184,11 +191,11 @@ export default function Availability() {
           <Button
             variant="outline"
             onClick={() => reset()}
-            disabled={data.datesWithTrainings.length === 0}
+            disabled={data.trainingAvailabilities.length === 0}
           >
             Annuler
           </Button>
-          <Button type="submit" disabled={data.datesWithTrainings.length === 0}>
+          <Button type="submit" disabled={data.trainingAvailabilities.length === 0}>
             Enregister
           </Button>
         </div>
