@@ -45,7 +45,7 @@ export default function Instructor(props: Props) {
   const { user } = usePage<{ user: User }>().props
 
   return (
-    <Layout title="Accueil">
+    <Layout title="Espace instructeurs">
       <Header />
       <div className="flex-1 space-y-4 py-8 pt-6">
         <div className="flex items-center justify-between space-y-2">
