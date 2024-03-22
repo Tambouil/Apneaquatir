@@ -46,6 +46,7 @@ router
     // availability
     router.get('/availability', [AvailabilityController, 'index'])
     router.post('/availability', [AvailabilityController, 'store'])
+    router.put('/availability', [AvailabilityController, 'update'])
   })
   .middleware([middleware.auth()])
 

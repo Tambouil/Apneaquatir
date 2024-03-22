@@ -8,7 +8,7 @@ import {
   TableCaption,
 } from './ui/table'
 import User from '#models/user'
-import { type FormEvent, useState } from 'react'
+import { type FormEvent, useState, useEffect } from 'react'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select'
 import { Props } from 'pages/instructor'
 import { useForm, usePage } from '@inertiajs/react'
@@ -37,6 +37,19 @@ export const AvailabilityTable = (props: Props) => {
   const { setData, post } = useForm({
     availabilities: initialData,
   })
+
+  useEffect(() => {
+    const updatedData = tableHead.map((date) => ({
+      id: date.id,
+      date: date.date,
+      trainings: date.trainings.map((training) => ({
+        id: training.id,
+        name: training.name,
+        availability: training.availability || UserChoices.NotSpecified,
+      })),
+    }))
+    setData('availabilities', updatedData)
+  }, [tableHead])
 
   const handleSelectChange = (dateIndex: number, trainingIndex: number, newValue: string) => {
     setData((prevData) => {

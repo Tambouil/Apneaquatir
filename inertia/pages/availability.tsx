@@ -82,7 +82,6 @@ export default function Availability() {
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault()
-    console.log(data.trainingAvailabilities)
     post('/availability', {
       onSuccess: () => {
         reset()

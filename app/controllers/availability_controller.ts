@@ -39,4 +39,42 @@ export default class AvailabilityController {
 
     return response.redirect().toPath('/instructor')
   }
+
+  async update({ request, response, auth }: HttpContext) {
+    const currentUser = auth.getUserOrFail()
+    const { newDate, datesToDelete, newTrainings } = request.only([
+      'newDate',
+      'datesToDelete',
+      'newTrainings',
+    ])
+
+    if (datesToDelete.length > 0) {
+      await AvailabilityDate.query().whereIn('id', datesToDelete).update({ isArchived: true })
+      await TrainingAvailability.query()
+        .whereIn('availabilityDateId', datesToDelete)
+        .update({ isArchived: true })
+      await InstructorAvailability.query()
+        .whereIn('dateId', datesToDelete)
+        .update({ isArchived: true })
+    }
+
+    if (newDate && newTrainings.length > 0) {
+      const availabilityDate = await AvailabilityDate.create({
+        userId: currentUser.id,
+        dateAvailable: newDate,
+      })
+
+      for (const trainingName of newTrainings) {
+        const training = await Training.firstOrCreate({ name: trainingName })
+
+        await TrainingAvailability.create({
+          userId: currentUser.id,
+          availabilityDateId: availabilityDate.id,
+          trainingId: training.id,
+        })
+      }
+    }
+
+    return response.redirect().back()
+  }
 }

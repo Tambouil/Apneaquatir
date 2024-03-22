@@ -6,10 +6,10 @@ import { Header } from '../components/header.js'
 import { Layout } from '../layouts/layout.js'
 import { Icons } from '../components/icon.js'
 import { AvailabilityTable } from '../components/availability_table.js'
-import { Button } from '../components/ui/button.js'
 import { UserRole } from '#enums/user_role'
 import { usePage } from '@inertiajs/react'
 import User from '#models/user'
+import { AvailabilityManager } from '../components/availability_manager.js'
 
 interface Training {
   id: TrainingId
@@ -51,7 +51,7 @@ export default function Instructor(props: Props) {
         <div className="flex items-center justify-between space-y-2">
           <h2 className="block text-xl md:text-3xl font-bold tracking-tight">Espace moniteurs</h2>
           {user.role === UserRole.Instructor && tableHead.length > 0 && (
-            <Button>Gérer les disponibilités</Button>
+            <AvailabilityManager tableHead={tableHead} />
           )}
         </div>
 
