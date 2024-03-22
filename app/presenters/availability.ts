@@ -15,4 +15,19 @@ export class AvailabilityPresenter {
   format(date: DateTime) {
     return date.setZone('Europe/Paris').setLocale('fr').toFormat('EEEE dd MMMM')
   }
+
+  translateTraining(training: string) {
+    switch (training) {
+      case 'static':
+        return 'Statique'
+      case 'dynamic':
+        return 'Dynamique'
+      case 'space':
+        return 'Espace proche'
+      case 'pool':
+        return 'Fosse'
+      default:
+        return 'Statique'
+    }
+  }
 }
