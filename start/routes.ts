@@ -19,6 +19,7 @@ const SettingsController = () => import('#controllers/settings_controller')
 const AccountController = () => import('#controllers/account_controller')
 const AvailabilityController = () => import('#controllers/availability_controller')
 const InstructorController = () => import('#controllers/instructor_controller')
+const AdminController = () => import('#controllers/admin_controller')
 
 router
   .group(() => {
@@ -47,6 +48,11 @@ router
     router.get('/availability', [AvailabilityController, 'index'])
     router.post('/availability', [AvailabilityController, 'store'])
     router.put('/availability', [AvailabilityController, 'update'])
+
+    // admin
+    router.get('/admin', [AdminController, 'index'])
+    router.put('/admin/:id', [AdminController, 'update'])
+    router.delete('/admin/:id', [AdminController, 'destroy'])
   })
   .middleware([middleware.auth()])
 

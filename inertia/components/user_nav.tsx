@@ -32,8 +32,8 @@ export function UserNav() {
           <Avatar>
             <AvatarImage src={avatarImg} alt="avatar" />
             <AvatarFallback>
-              {user.firstName.charAt(0)}
-              {user.lastName.charAt(0)}
+              {user.firstName.charAt(0).toUpperCase()}
+              {user.lastName.charAt(0).toUpperCase()}
             </AvatarFallback>
           </Avatar>
         </Button>
@@ -49,7 +49,15 @@ export function UserNav() {
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
-          {user.role === UserRole.Instructor && (
+          {user.role === UserRole.Admin && (
+            <DropdownMenuItem>
+              <Link href="/admin" className="w-full">
+                Administration
+              </Link>
+              <Icons.admin className="w-4 h-4" />
+            </DropdownMenuItem>
+          )}
+          {user.role !== UserRole.User && (
             <DropdownMenuItem>
               <Link href="/booking/dates" className="w-full">
                 Nouvelles dates
