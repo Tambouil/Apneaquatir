@@ -1,4 +1,5 @@
 import { Head, Link } from '@inertiajs/react'
+import background from '../assets/images/background.jpeg'
 
 interface Props {
   title: string
@@ -27,8 +28,8 @@ export const AuthLayout = ({ title, heading, description, children }: Props) => 
           <div className="lg:grid lg:min-h-screen lg:grid-cols-12">
             <section className="relative flex h-32 items-end bg-gray-900 lg:col-span-5 lg:h-full xl:col-span-6">
               <img
-                alt=""
-                src="https://images.unsplash.com/photo-1617195737496-bc30194e3a19?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
+                src={background}
+                alt="background"
                 className="absolute inset-0 h-full w-full object-cover opacity-80"
               />
               <div className="hidden lg:relative lg:block lg:p-12">
@@ -52,8 +53,8 @@ export const AuthLayout = ({ title, heading, description, children }: Props) => 
                 </h2>
 
                 <p className="mt-4 leading-relaxed text-white/90">
-                  Cette application vous permettra de consulter et d'indiquer vos disponibilités
-                  pour les prochaines dates de la fosse Loïc Leferme.
+                  Cette application vous permet de consulter et d'indiquer vos disponibilités aux
+                  différents créneaux de la fosse Loïc Leferme.
                 </p>
               </div>
             </section>
@@ -84,8 +85,8 @@ export const AuthLayout = ({ title, heading, description, children }: Props) => 
                   </h1>
 
                   <p className="mt-4 leading-relaxed text-gray-500">
-                    Cette application vous permettra de consulter et d'indiquer vos disponibilités
-                    pour les prochaines dates de la fosse Loïc Leferme.
+                    Cette application vous permet de consulter et d'indiquer vos disponibilités aux
+                    différents créneaux de la fosse Loïc Leferme.
                   </p>
                 </div>
 
