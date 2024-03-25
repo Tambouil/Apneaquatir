@@ -38,7 +38,7 @@ export default function Home(props: Props) {
       <div className="flex-1 space-y-4 py-8 pt-6">
         <div className="flex items-center justify-between space-y-2">
           <h2 className="block text-xl md:text-3xl font-bold tracking-tight">Espace fosse</h2>
-          {user.role === UserRole.Instructor && datesAvailable.length > 0 && (
+          {user.role !== UserRole.User && datesAvailable.length > 0 && (
             <BookingManager datesAvailable={datesAvailable} />
           )}
         </div>
