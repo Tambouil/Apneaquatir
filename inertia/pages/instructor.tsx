@@ -1,15 +1,16 @@
 import type { UserId } from '#models/user'
 import type { AvailabilityDateId } from '#models/availability_date'
 import type { TrainingId } from '#models/training'
-import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card.js'
-import { Header } from '../components/header.js'
-import { Layout } from '../layouts/layout.js'
-import { Icons } from '../components/icon.js'
-import { AvailabilityTable } from '../components/availability_table.js'
-import { UserRole } from '#enums/user_role'
-import { usePage } from '@inertiajs/react'
 import User from '#models/user'
-import { AvailabilityManager } from '../components/availability_manager.js'
+import { usePage } from '@inertiajs/react'
+import { UserRole } from '#enums/user_role'
+
+import { Layout } from '@/layouts/layout'
+import { Header } from '@/components/header'
+import { Icons } from '@/components/icon'
+import { AvailabilityTable } from '@/components/availability_table'
+import { AvailabilityManager } from '@/components/availability_manager'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 
 interface Training {
   id: TrainingId

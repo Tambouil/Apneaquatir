@@ -1,10 +1,10 @@
 import type { FormEvent } from 'react'
-import { AuthLayout } from '../../layouts/auth_layout'
-import { Label } from '../../components/ui/label'
-import { Input } from '../../components/ui/input'
-import { Button, buttonVariants } from '../../components/ui/button'
-import { Icons } from '../../components/icon'
 import { Link, useForm, usePage } from '@inertiajs/react'
+import { AuthLayout } from '@/layouts/auth_layout'
+import { Icons } from '@/components/icon'
+import { Button, buttonVariants } from '@/components/ui/button'
+import { Label } from '@/components/ui/label'
+import { Input } from '@/components/ui/input'
 
 export default function Login() {
   const flash: any = usePage().props.flash

@@ -1,3 +1,9 @@
+import { type FormEvent, useState, useEffect } from 'react'
+import { useForm, usePage } from '@inertiajs/react'
+import { UserRole } from '#enums/user_role'
+import { UserChoices } from '#enums/user_choices'
+import User from '#models/user'
+
 import {
   Table,
   TableHeader,
@@ -6,17 +12,18 @@ import {
   TableRow,
   TableCell,
   TableCaption,
-} from './ui/table'
-import User from '#models/user'
-import { type FormEvent, useState, useEffect } from 'react'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select'
-import { Props } from 'pages/instructor'
-import { useForm, usePage } from '@inertiajs/react'
-import { UserChoices } from '#enums/user_choices'
-import { Icons } from './icon'
-import { Button } from './ui/button'
-import { useToast } from './ui/use_toast'
-import { UserRole } from '#enums/user_role'
+} from '@/components/ui/table'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
+import { Icons } from '@/components/icon'
+import { Button } from '@/components/ui/button'
+import { useToast } from '@/components/ui/use_toast'
+import { Props } from '@/pages/instructor'
 
 export const AvailabilityTable = (props: Props) => {
   const { tableHead, otherInstructors } = props

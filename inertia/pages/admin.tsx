@@ -1,25 +1,27 @@
+import { useRef } from 'react'
+import { useForm } from '@inertiajs/react'
+import { UserRole } from '#enums/user_role'
 import User from '#models/user'
-import { Layout } from '../layouts/layout'
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '../components/ui/card'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '../components/ui/tabs'
-import { Avatar, AvatarFallback, AvatarImage } from '../components/ui/avatar'
+
+import Avatar1 from '@/assets/avatars/01.png'
+import Avatar2 from '@/assets/avatars/02.png'
+import Avatar3 from '@/assets/avatars/03.png'
+import Avatar4 from '@/assets/avatars/04.png'
+import Avatar5 from '@/assets/avatars/05.png'
+
+import { Layout } from '@/layouts/layout'
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '../components/ui/select'
-import { Header } from '../components/header'
-import { UserRole } from '#enums/user_role'
-import { useForm } from '@inertiajs/react'
-import { Button } from '../components/ui/button'
-import { useRef } from 'react'
-import Avatar1 from '../assets/avatars/01.png'
-import Avatar2 from '../assets/avatars/02.png'
-import Avatar3 from '../assets/avatars/03.png'
-import Avatar4 from '../assets/avatars/04.png'
-import Avatar5 from '../assets/avatars/05.png'
+} from '@/components/ui/select'
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import { Header } from '@/components/header'
+import { Button } from '@/components/ui/button'
 
 interface Props {
   users: User[]

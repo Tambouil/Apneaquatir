@@ -1,12 +1,13 @@
-import { FormEvent } from 'react'
+import type { FormEvent } from 'react'
 import User from '#models/user'
 import { useForm, usePage } from '@inertiajs/react'
-import { Separator } from '../components/ui/separator'
-import { Label } from '../components/ui/label'
-import { Input } from '../components/ui/input'
-import { Button } from '../components/ui/button'
-import { useToast } from '../components/ui/use_toast'
-import { SettingsLayout } from '../layouts/settings_layout'
+
+import { SettingsLayout } from '@/layouts/settings_layout'
+import { Separator } from '@/components/ui/separator'
+import { Label } from '@/components/ui/label'
+import { Input } from '@/components/ui/input'
+import { Button } from '@/components/ui/button'
+import { useToast } from '@/components/ui/use_toast'
 
 export default function Settings() {
   const { user } = usePage<{ user: User }>().props

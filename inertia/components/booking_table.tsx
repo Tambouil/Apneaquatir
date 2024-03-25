@@ -1,11 +1,14 @@
 import { type FormEvent, useState, useEffect, useMemo, useCallback } from 'react'
 import { useForm } from '@inertiajs/react'
 import { UserChoices } from '#enums/user_choices'
-import { Props } from 'pages/home'
-import { Button } from './ui/button'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select'
-import { Icons } from './icon'
-import { useToast } from './ui/use_toast'
+
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
 import {
   Table,
   TableHeader,
@@ -15,7 +18,11 @@ import {
   TableCell,
   TableCaption,
   TableFooter,
-} from './ui/table'
+} from '@/components/ui/table'
+import { Icons } from '@/components/icon'
+import { useToast } from '@/components/ui/use_toast'
+import { Button } from '@/components/ui/button'
+import { Props } from '@/pages/home'
 
 export const BookingTable = (props: Props) => {
   const { currentUser, users, datesAvailable } = props

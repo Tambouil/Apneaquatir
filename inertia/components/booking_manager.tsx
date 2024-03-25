@@ -1,3 +1,11 @@
+import BookingDate, { type BookingDateId } from '#models/booking_date'
+import { useEffect } from 'react'
+import { useForm } from '@inertiajs/react'
+import { CalendarIcon } from '@radix-ui/react-icons'
+import { format } from 'date-fns'
+import { fr } from 'date-fns/locale/fr'
+
+import { cn } from '@/lib/utils'
 import {
   AlertDialog,
   AlertDialogTrigger,
@@ -8,19 +16,12 @@ import {
   AlertDialogCancel,
   AlertDialogAction,
   AlertDialogDescription,
-} from './ui/alert_dialog'
-import { useEffect } from 'react'
-import BookingDate, { type BookingDateId } from '#models/booking_date'
-import { Button } from './ui/button'
-import { Icons } from './icon'
-import { Separator } from './ui/separator'
-import { useForm } from '@inertiajs/react'
-import { Popover, PopoverContent, PopoverTrigger } from './ui/popover'
-import { Calendar } from './ui/calendar'
-import { CalendarIcon } from '@radix-ui/react-icons'
-import { cn } from '../utils/utils'
-import { format } from 'date-fns'
-import { fr } from 'date-fns/locale/fr'
+} from '@/components/ui/alert_dialog'
+import { Button } from '@/components/ui/button'
+import { Icons } from '@/components/icon'
+import { Separator } from '@/components/ui/separator'
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
+import { Calendar } from '@/components/ui/calendar'
 
 interface Props {
   datesAvailable: BookingDate[]

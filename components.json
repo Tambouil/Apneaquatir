@@ -10,8 +10,10 @@
     "cssVariables": true,
     "prefix": ""
   },
+
   "aliases": {
-    "components": "inertia/components",
-    "utils": "inertia/utils/utils"
+    "utils": "@/lib/utils",
+    "components": "@/components",
+    "ui": "@/components/ui"
   }
 }

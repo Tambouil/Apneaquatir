@@ -1,3 +1,11 @@
+import type { AvailabilityDateId } from '#models/availability_date'
+import type { TrainingId } from '#models/training'
+import { useEffect } from 'react'
+import { format } from 'date-fns'
+import { fr } from 'date-fns/locale/fr'
+import { CalendarIcon } from '@radix-ui/react-icons'
+
+import { cn } from '@/lib/utils'
 import {
   AlertDialog,
   AlertDialogTrigger,
@@ -8,23 +16,16 @@ import {
   AlertDialogCancel,
   AlertDialogAction,
   AlertDialogDescription,
-} from './ui/alert_dialog'
-import { useEffect } from 'react'
-import type { AvailabilityDateId } from '#models/availability_date'
-import { Popover, PopoverContent, PopoverTrigger } from './ui/popover'
-import { Button } from './ui/button'
-import { Icons } from './icon'
-import { Separator } from './ui/separator'
+} from '@/components/ui/alert_dialog'
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
+import { Button } from '@/components/ui/button'
+import { Icons } from '@/components/icon'
+import { Separator } from '@/components/ui/separator'
 import { useForm } from '@inertiajs/react'
-import { Calendar } from './ui/calendar'
-import { CalendarIcon } from '@radix-ui/react-icons'
-import { cn } from '../utils/utils'
-import { format } from 'date-fns'
-import { fr } from 'date-fns/locale/fr'
-import { TrainingId } from '#models/training'
-import { Checkbox } from './ui/checkbox'
-import { Label } from './ui/label'
-import { useToast } from './ui/use_toast'
+import { Calendar } from '@/components/ui/calendar'
+import { Checkbox } from '@/components/ui/checkbox'
+import { Label } from '@/components/ui/label'
+import { useToast } from '@/components/ui/use_toast'
 
 interface Training {
   id: TrainingId

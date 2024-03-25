@@ -1,7 +1,10 @@
 import type { FormEvent } from 'react'
 import { Link, useForm, usePage } from '@inertiajs/react'
-import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar.js'
-import { Button } from './ui/button.js'
+import { DropdownMenuGroup } from '@radix-ui/react-dropdown-menu'
+import { UserRole } from '#enums/user_role'
+import User from '#models/user'
+
+import AvatarImg from '@/assets/avatars/02.png'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -9,12 +12,10 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from './ui/dropdown_menu.js'
-import User from '#models/user'
-import { Icons } from './icon.js'
-import { DropdownMenuGroup } from '@radix-ui/react-dropdown-menu'
-import { UserRole } from '#enums/user_role'
-import avatarImg from '../assets/avatars/02.png'
+} from '@/components/ui/dropdown_menu'
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import { Button } from '@/components/ui/button'
+import { Icons } from '@/components/icon'
 
 export function UserNav() {
   const { user } = usePage<{ user: User }>().props
@@ -30,7 +31,7 @@ export function UserNav() {
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" className="relative h-8 w-8 rounded-full">
           <Avatar>
-            <AvatarImage src={avatarImg} alt="avatar" />
+            <AvatarImage src={AvatarImg} alt="avatar" />
             <AvatarFallback>
               {user.firstName.charAt(0).toUpperCase()}
               {user.lastName.charAt(0).toUpperCase()}

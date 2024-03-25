@@ -4,13 +4,14 @@ import { CalendarIcon } from '@radix-ui/react-icons'
 import { useForm, usePage } from '@inertiajs/react'
 import { format } from 'date-fns'
 import { fr } from 'date-fns/locale/fr'
-import { Popover, PopoverContent, PopoverTrigger } from './ui/popover'
-import { cn } from '../utils/utils'
-import { Button } from './ui/button'
-import { Calendar } from './ui/calendar'
-import { Label } from './ui/label'
-import { Icons } from './icon'
-import { useToast } from './ui/use_toast'
+
+import { cn } from '@/lib/utils'
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
+import { Button } from '@/components/ui/button'
+import { Calendar } from '@/components/ui/calendar'
+import { Label } from '@/components/ui/label'
+import { Icons } from '@/components/icon'
+import { useToast } from '@/components/ui/use_toast'
 
 export function DatePicker({ className }: React.HTMLAttributes<HTMLDivElement>) {
   const { data, setData, post, errors, processing, reset } = useForm({

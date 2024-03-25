@@ -1,6 +1,6 @@
-import { Separator } from '../components/ui/separator'
-import { DatePicker } from '../components/date_picker'
-import { SettingsLayout } from '../layouts/settings_layout'
+import { Separator } from '@/components/ui/separator'
+import { DatePicker } from '@/components/date_picker'
+import { SettingsLayout } from '@/layouts/settings_layout'
 
 export default function Booking() {
   const sidebarNavItems = [

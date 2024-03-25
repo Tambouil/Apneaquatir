@@ -1,6 +1,6 @@
-import { Separator } from '../components/ui/separator'
-import { SettingsSidebar } from '../components/settings_sidebar'
 import { Head } from '@inertiajs/react'
+import { Separator } from '@/components/ui/separator'
+import { SettingsSidebar } from '@/components/settings_sidebar'
 
 interface Props {
   title: string
