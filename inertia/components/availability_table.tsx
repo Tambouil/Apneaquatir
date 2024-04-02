@@ -12,18 +12,18 @@ import {
   TableRow,
   TableCell,
   TableCaption,
-} from '@/components/ui/table'
+} from '~/components/ui/table'
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select'
-import { Icons } from '@/components/icon'
-import { Button } from '@/components/ui/button'
-import { useToast } from '@/components/ui/use_toast'
-import { Props } from '@/pages/instructor'
+} from '~/components/ui/select'
+import { Icons } from '~/components/icon'
+import { Button } from '~/components/ui/button'
+import { useToast } from '~/components/ui/use_toast'
+import { Props } from '~/pages/instructor'
 
 export const AvailabilityTable = (props: Props) => {
   const { tableHead, otherInstructors } = props

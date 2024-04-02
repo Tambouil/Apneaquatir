@@ -5,12 +5,12 @@ import User from '#models/user'
 import { usePage } from '@inertiajs/react'
 import { UserRole } from '#enums/user_role'
 
-import { Layout } from '@/layouts/layout'
-import { Header } from '@/components/header'
-import { Icons } from '@/components/icon'
-import { AvailabilityTable } from '@/components/availability_table'
-import { AvailabilityManager } from '@/components/availability_manager'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Layout } from '~/layouts/layout'
+import { Header } from '~/components/header'
+import { Icons } from '~/components/icon'
+import { AvailabilityTable } from '~/components/availability_table'
+import { AvailabilityManager } from '~/components/availability_manager'
+import { Card, CardContent, CardHeader, CardTitle } from '~/components/ui/card'
 
 interface Training {
   id: TrainingId

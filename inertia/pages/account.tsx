@@ -2,8 +2,8 @@ import React from 'react'
 import User from '#models/user'
 import { useForm, usePage } from '@inertiajs/react'
 
-import { SettingsLayout } from '@/layouts/settings_layout'
-import { Icons } from '@/components/icon'
+import { SettingsLayout } from '~/layouts/settings_layout'
+import { Icons } from '~/components/icon'
 import {
   AlertDialog,
   AlertDialogTrigger,
@@ -14,9 +14,9 @@ import {
   AlertDialogFooter,
   AlertDialogCancel,
   AlertDialogAction,
-} from '@/components/ui/alert_dialog'
-import { Separator } from '@/components/ui/separator'
-import { Button, buttonVariants } from '@/components/ui/button'
+} from '~/components/ui/alert_dialog'
+import { Separator } from '~/components/ui/separator'
+import { Button, buttonVariants } from '~/components/ui/button'
 
 export default function Account() {
   const { user } = usePage<{ user: User }>().props

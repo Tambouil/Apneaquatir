@@ -5,7 +5,7 @@ import { format } from 'date-fns'
 import { fr } from 'date-fns/locale/fr'
 import { CalendarIcon } from '@radix-ui/react-icons'
 
-import { cn } from '@/lib/utils'
+import { cn } from '~/lib/utils'
 import {
   AlertDialog,
   AlertDialogTrigger,
@@ -16,16 +16,16 @@ import {
   AlertDialogCancel,
   AlertDialogAction,
   AlertDialogDescription,
-} from '@/components/ui/alert_dialog'
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
-import { Button } from '@/components/ui/button'
-import { Icons } from '@/components/icon'
-import { Separator } from '@/components/ui/separator'
+} from '~/components/ui/alert_dialog'
+import { Popover, PopoverContent, PopoverTrigger } from '~/components/ui/popover'
+import { Button } from '~/components/ui/button'
+import { Icons } from '~/components/icon'
+import { Separator } from '~/components/ui/separator'
 import { useForm } from '@inertiajs/react'
-import { Calendar } from '@/components/ui/calendar'
-import { Checkbox } from '@/components/ui/checkbox'
-import { Label } from '@/components/ui/label'
-import { useToast } from '@/components/ui/use_toast'
+import { Calendar } from '~/components/ui/calendar'
+import { Checkbox } from '~/components/ui/checkbox'
+import { Label } from '~/components/ui/label'
+import { useToast } from '~/components/ui/use_toast'
 
 interface Training {
   id: TrainingId

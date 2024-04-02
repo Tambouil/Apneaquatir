@@ -1,7 +1,7 @@
 import React from 'react'
 import { Head } from '@inertiajs/react'
-import { Toaster } from '@/components/ui/toaster'
-import { Separator } from '@/components/ui/separator'
+import { Toaster } from '~/components/ui/toaster'
+import { Separator } from '~/components/ui/separator'
 
 interface Props {
   title: string

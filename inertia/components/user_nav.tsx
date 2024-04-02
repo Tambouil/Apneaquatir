@@ -4,7 +4,7 @@ import { DropdownMenuGroup } from '@radix-ui/react-dropdown-menu'
 import { UserRole } from '#enums/user_role'
 import User from '#models/user'
 
-import AvatarImg from '@/assets/avatars/02.png'
+import AvatarImg from '~/assets/avatars/02.png'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -12,10 +12,10 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown_menu'
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import { Button } from '@/components/ui/button'
-import { Icons } from '@/components/icon'
+} from '~/components/ui/dropdown_menu'
+import { Avatar, AvatarFallback, AvatarImage } from '~/components/ui/avatar'
+import { Button } from '~/components/ui/button'
+import { Icons } from '~/components/icon'
 
 export function UserNav() {
   const { user } = usePage<{ user: User }>().props

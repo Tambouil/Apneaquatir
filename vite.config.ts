@@ -1,6 +1,5 @@
 import { defineConfig } from 'vite'
 import { getDirname } from '@adonisjs/core/helpers'
-import { resolve } from 'node:path'
 import inertia from '@adonisjs/inertia/client'
 import react from '@vitejs/plugin-react'
 import adonisjs from '@adonisjs/vite/client'
@@ -18,8 +17,7 @@ export default defineConfig({
    */
   resolve: {
     alias: {
-      '@/': `${resolve(getDirname(import.meta.url), 'inertia')}/`,
-      '~/': `${resolve(getDirname(import.meta.url), '.')}/`,
+      '~/': `${getDirname(import.meta.url)}/inertia/`,
     },
   },
 })

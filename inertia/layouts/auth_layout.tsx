@@ -1,5 +1,5 @@
 import { Head, Link } from '@inertiajs/react'
-import background from '@/assets/images/background.jpeg'
+import background from '~/assets/images/background.jpeg'
 
 interface Props {
   title: string

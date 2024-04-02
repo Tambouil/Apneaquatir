@@ -8,7 +8,7 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select'
+} from '~/components/ui/select'
 import {
   Table,
   TableHeader,
@@ -18,11 +18,11 @@ import {
   TableCell,
   TableCaption,
   TableFooter,
-} from '@/components/ui/table'
-import { Icons } from '@/components/icon'
-import { useToast } from '@/components/ui/use_toast'
-import { Button } from '@/components/ui/button'
-import { Props } from '@/pages/home'
+} from '~/components/ui/table'
+import { Icons } from '~/components/icon'
+import { useToast } from '~/components/ui/use_toast'
+import { Button } from '~/components/ui/button'
+import { Props } from '~/pages/home'
 
 export const BookingTable = (props: Props) => {
   const { currentUser, users, datesAvailable } = props

@@ -1,5 +1,5 @@
 import { usePage } from '@inertiajs/react'
-import { UserNav } from '@/components/user_nav'
+import { UserNav } from '~/components/user_nav'
 
 export const Header = () => {
   const { url } = usePage()

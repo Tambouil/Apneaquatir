@@ -5,7 +5,7 @@ import { CalendarIcon } from '@radix-ui/react-icons'
 import { format } from 'date-fns'
 import { fr } from 'date-fns/locale/fr'
 
-import { cn } from '@/lib/utils'
+import { cn } from '~/lib/utils'
 import {
   AlertDialog,
   AlertDialogTrigger,
@@ -16,12 +16,12 @@ import {
   AlertDialogCancel,
   AlertDialogAction,
   AlertDialogDescription,
-} from '@/components/ui/alert_dialog'
-import { Button } from '@/components/ui/button'
-import { Icons } from '@/components/icon'
-import { Separator } from '@/components/ui/separator'
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
-import { Calendar } from '@/components/ui/calendar'
+} from '~/components/ui/alert_dialog'
+import { Button } from '~/components/ui/button'
+import { Icons } from '~/components/icon'
+import { Separator } from '~/components/ui/separator'
+import { Popover, PopoverContent, PopoverTrigger } from '~/components/ui/popover'
+import { Calendar } from '~/components/ui/calendar'
 
 interface Props {
   datesAvailable: BookingDate[]

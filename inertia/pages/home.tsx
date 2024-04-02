@@ -3,12 +3,12 @@ import { UserRole } from '#enums/user_role'
 import BookingDate, { type BookingDateId } from '#models/booking_date'
 import User from '#models/user'
 
-import { Layout } from '@/layouts/layout'
-import { Header } from '@/components/header'
-import { Icons } from '@/components/icon'
-import { BookingManager } from '@/components/booking_manager'
-import { BookingTable } from '@/components/booking_table'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Layout } from '~/layouts/layout'
+import { Header } from '~/components/header'
+import { Icons } from '~/components/icon'
+import { BookingManager } from '~/components/booking_manager'
+import { BookingTable } from '~/components/booking_table'
+import { Card, CardContent, CardHeader, CardTitle } from '~/components/ui/card'
 
 interface Choice {
   bookingDateId: BookingDateId

@@ -5,13 +5,13 @@ import { useForm, usePage } from '@inertiajs/react'
 import { format } from 'date-fns'
 import { fr } from 'date-fns/locale/fr'
 
-import { cn } from '@/lib/utils'
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
-import { Button } from '@/components/ui/button'
-import { Calendar } from '@/components/ui/calendar'
-import { Label } from '@/components/ui/label'
-import { Icons } from '@/components/icon'
-import { useToast } from '@/components/ui/use_toast'
+import { cn } from '~/lib/utils'
+import { Popover, PopoverContent, PopoverTrigger } from '~/components/ui/popover'
+import { Button } from '~/components/ui/button'
+import { Calendar } from '~/components/ui/calendar'
+import { Label } from '~/components/ui/label'
+import { Icons } from '~/components/icon'
+import { useToast } from '~/components/ui/use_toast'
 
 export function DatePicker({ className }: React.HTMLAttributes<HTMLDivElement>) {
   const { data, setData, post, errors, processing, reset } = useForm({
