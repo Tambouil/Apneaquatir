@@ -78,6 +78,15 @@ export default defineConfig({
     ],
     forceExit: false,
   },
+  /*
+  |--------------------------------------------------------------------------
+  | Metafiles
+  |--------------------------------------------------------------------------
+  |
+  | A collection of files you want to copy to the build folder when creating
+  | the production build.
+  |
+  */
   metaFiles: [
     {
       pattern: 'resources/views/**/*.edge',
@@ -88,4 +97,9 @@ export default defineConfig({
       reloadServer: false,
     },
   ],
+
+  assetsBundler: false,
+  unstable_assembler: {
+    onBuildStarting: [() => import('@adonisjs/vite/build_hook')],
+  },
 })
